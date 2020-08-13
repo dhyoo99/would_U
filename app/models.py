@@ -1,16 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator,MaxValueValidator
-
-# Create your models here.
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Planet(models.Model):
-    owner = models.OneToOneField(User, on_delete= models.CASCADE, primary_key= True)
+    user = models.OneToOneField(User, on_delete= models.CASCADE, primary_key= True, related_name='planet')
     name = models.CharField(max_length=100)
     #img_src = models.TextField()
 
-    def __str__(self):
-        return self.name
+    @receiver(post_save, sender=User)
+    def create_user_planet(sender, instance, created, **kwargs):  
+      if created:
+        Planet.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_planet(sender, instance, **kwargs):  
+        instance.planet.save()
 
 class Qna(models.Model):
     owner = models.OneToOneField(User, on_delete = models.CASCADE, related_name = 'Qna')
