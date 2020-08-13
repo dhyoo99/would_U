@@ -9,6 +9,15 @@ class Planet(models.Model):
     name = models.CharField(max_length=100)
     #img_src = models.TextField()
 
+    @receiver(post_save, sender=User)
+    def create_user_planet(sender, instance, created, **kwargs):  
+      if created:
+          Planet.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_planet(sender, instance, **kwargs):  
+        instance.planet.save()
+
 class QnA(models.Model):
     owner = models.OneToOneField(User, on_delete = models.CASCADE, related_name = 'QnA')
 
