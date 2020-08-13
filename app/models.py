@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 class Planet(models.Model):
@@ -44,9 +45,9 @@ class Score(models.Model):
     QnA = models.ForeignKey(QnA, on_delete = models.CASCADE, related_name = 'scores')
     score = models.IntegerField()
 
-#각 행성간 거리
-class Distance(models.Model):
-    this = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name= 'distances')
-    that = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name= 'distances')
-    distance = models.IntegerField()
+# #각 행성간 거리
+# class Distance(models.Model):
+#     this = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name= 'distances')
+#     that = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name= 'distances')
+#     distance = models.IntegerField()
     
