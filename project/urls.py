@@ -22,6 +22,11 @@ import app.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('', app.views.index, name='index'),
     path('apps/', include('app.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+=======
+    path('accounts/', include('accounts.urls')),
+]
+>>>>>>> f5a09ff7656b65932237baf3ea8747de9757e55b
