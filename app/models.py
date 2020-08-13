@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator,MaxValueValidator
-
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 # Create your models here.
 
 class Planet(models.Model):
@@ -17,9 +18,6 @@ class Planet(models.Model):
     @receiver(post_save, sender=User)
     def save_user_planet(sender, instance, **kwargs):  
         instance.planet.save()
-
-class QnA(models.Model):
-    owner = models.OneToOneField(User, on_delete = models.CASCADE, related_name = 'QnA')
 
 class Qna(models.Model):
     owner = models.OneToOneField(User, on_delete = models.CASCADE, related_name = 'Qna')
