@@ -4,6 +4,7 @@ from django.contrib import auth
 from django.shortcuts import redirect
 from .models import Planet, Qna, Question, Option, Qna_question, Answer, Choice, Score, Distance
 from django.contrib.auth.decorators import login_required
+from .distance import createDistance
 
 
 def index(request):
@@ -40,22 +41,25 @@ def create_qna(request):
     if Qna_question.objects.filter(Qna=new_qna).count() > 0:
         error = '이미 작성완료했습니다'
         return render(request, 'planet/create_qna.html', {'error': error})
-    qna_questions = []
-    for q in questions:
-        qna_question, created = Qna_question.objects.get_or_create(
-            Qna=new_qna,
-            question=q
-        )
-        qna_questions.append(qna_question)
-    print(qna_questions)
 
     if request.method == 'POST':
+
+        qna_questions = []
+        for q in questions:
+            qna_question, created = Qna_question.objects.get_or_create(
+                Qna=new_qna,
+                question=q
+            )
+            qna_questions.append(qna_question)
+        print(qna_questions)
+
         for pair in qna_questions:
             answer = Option.objects.get(pk=request.POST[f'{pair.question.pk}'])
-            Answer.objects.create(
+            a = Answer.objects.create(
                 qna_question=pair,
                 option=answer
             )
+            print(a)
 
         qna_pk = new_qna.pk
         return redirect('/app/', qna_pk)  # share_qna로 redirect하게 수정 필요
@@ -113,5 +117,6 @@ def solve_qna(request, qna_pk):
 
 def score(request, score_pk):
     score = Score.objects.get(pk=score_pk)
-
+    d = createDistance(score_pk)
+    print(d.distance)
     return render(request, 'planet/score.html', {'score': score})
