@@ -1,6 +1,6 @@
 .vscode
 db.sqlite3
-
+.migrations
 ### Django ###
 *.log
 *.pot
