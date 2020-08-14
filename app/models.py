@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator,MaxValueValidator
 # Create your models here.
 
 class Planet(models.Model):
-    owner = models.OneToOneField(User, on_delete= models.CASCADE, primary_key= True)
+    user = models.OneToOneField(User, on_delete= models.CASCADE, primary_key= True, related_name='planet')
     name = models.CharField(max_length=100)
     #img_src = models.TextField()
 
@@ -17,7 +17,7 @@ class Qna(models.Model):
 
     def __str__(self):
         return self.owner.username
-        
+
 #질문 목록 data
 class Question(models.Model):
     WEIGHT = ((1,1),(2,2),(3,3))
@@ -33,7 +33,7 @@ class Option(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name= 'options')
     content = models.CharField(max_length=200)
     def __str__(self):
-        return self.content
+        return self.question.content + '/' + self.content
      
 
 #QnA와 그 안에 포함된 Question의 관계 나타냄.
