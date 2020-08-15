@@ -31,12 +31,28 @@ def signup(request):
             password = request.POST["password1"]
             planetname = request.POST["planetname"]
 
-            user = User.objects.create_user(
-                username=username, password=password)
-            user.planet.name = planetname
-            user.save()
+            try:
+                user = User.objects.create_user(
+                    username=username, password=password)
+
+                if Planet.objects.filter(name=planetname).count() > 0:
+                    error =  "중복된 행성 이름입니다."
+                    return render(request, 'registration/signup.html', {'error': error})
+
+                else:
+                    user.planet.name = planetname
+                    user.save()
+
+            except:
+                error =  "중복된 아이디입니다."
+                return render(request, 'registration/signup.html', {'error': error})
+
             auth.login(request, user)
             return redirect('user_home')
+            
+        else:
+            error = "비밀번호가 일치하지 않습니다."
+            return render(request, 'registration/signup.html', {'error': error})
 
     return render(request, 'registration/signup.html')
 
