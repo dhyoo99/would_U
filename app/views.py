@@ -32,6 +32,9 @@ def signup(request):
             return redirect('/app/')
     return render(request, 'registration/signup.html')
 
+@login_required(login_url='/app/login/login')
+def create_qna_home(request):
+    return render(request, 'planet/create_qna_home.html')
 
 @login_required(login_url='/app/login/login')
 def create_qna(request):
@@ -64,10 +67,13 @@ def create_qna(request):
             print(a)
 
         qna_pk = new_qna.pk
-        return redirect('/app/', qna_pk)  # share_qna로 redirect하게 수정 필요
+        return redirect('/app/share_qna', qna_pk)  # share_qna로 redirect하게 수정 필요
 
     return render(request, 'planet/create_qna.html', {'questions': questions})
 
+@login_required(login_url='/app/login/login')
+def solve_qna_home(request):
+    return render(request, 'planet/solve_qna_home.html')
 
 @login_required(login_url='/app/login/login')
 def solve_qna(request, qna_pk):
@@ -125,5 +131,14 @@ def score(request, score_pk):
     print(d.distance)
     return render(request, 'planet/score.html', {'score': score})
 
+@login_required(login_url='/app/login/login')
 def share_qna(request):
     return render(request, 'planet/share_qna.html')
+
+@login_required(login_url='/app/login/login')
+def result_qna(request):
+    return render(request, 'planet/result_qna.html')
+
+@login_required(login_url='/app/login/login')
+def answer_detail(request):
+    return render(request, 'planet/answer_detail.html')
