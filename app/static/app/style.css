@@ -1,0 +1,51 @@
+* {
+    background-color: black;
+}
+
+.english {
+    width: 90%;
+    height: 15%;
+    top: 10%;
+    left: 10%;
+    text-align: left;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 45px;
+    line-height: 55px;
+    color: #FFFFFF;
+}
+
+.korean {
+    position: absolute;
+    width: 176px;
+    height: 58px;
+    left: 35px;
+    top: 209px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+
+    color: #FFFFFF;
+}
+
+button.enter {
+    position: absolute;
+    width: 335px;
+    height: 71px;
+    left: 37px;
+    top: 622px;
+    background: #FFFFFF;
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 37px;
+    color: black;
+}
