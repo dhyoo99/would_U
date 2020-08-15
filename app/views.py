@@ -41,15 +41,8 @@ def signup(request):
     return render(request, 'registration/signup.html')
 
 
-<< << << < HEAD
-== == == =
-
-
 def user_home(request):
     return render(request, 'planet/user_home.html')
-
-
->>>>>> > 84aa493a372e7044c961c4cc4a0b16de4605f984
 
 
 @login_required(login_url='/app/login/login')
@@ -104,19 +97,12 @@ def create_qna(request):
     return render(request, 'planet/create_qna.html', {'questions': questions})
 
 
-<< << << < HEAD
-
-
 @login_required(login_url='/app/login/login')
 def solve_qna_home(request):
     return render(request, 'planet/solve_qna_home.html')
 
 
 @login_required(login_url='/app/login/login')
-== == == =
->>>>>> > 84aa493a372e7044c961c4cc4a0b16de4605f984
-
-
 def solve_qna(request, qna_pk):
     qna_to_solve = Qna.objects.get(pk=qna_pk)
     planet_name = Planet.objects.get(user=qna_to_solve.owner).name
