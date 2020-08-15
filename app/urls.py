@@ -20,7 +20,7 @@ urlpatterns = [
     path('answer_detail/', views.answer_detail, name='answer_detail'), 
     
     path('account/', views.account, name='account'),
-    path('signup/user_home/', views.user_home, name='user_home'),
+    path('user_home/', views.user_home, name='user_home'),
     path('share_qna/', views.share_qna, name='share_qna'),
   
   # friend_list의 결과가져옴

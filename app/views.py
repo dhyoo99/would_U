@@ -32,11 +32,21 @@ def signup(request):
             user.planet.name = planetname
             user.save()
             auth.login(request, user)
-            return redirect('/app/')
+            return redirect('/app/user_home/', {"user":user})
     return render(request, 'registration/signup.html')
 
 @login_required(login_url='/app/login/login')
 def create_qna_home(request):
+    questions = Question.objects.all()
+
+    new_qna = Qna.objects.get(
+        owner=request.user
+    )
+
+    if Qna_question.objects.filter(Qna=new_qna).count() > 0:
+        error = '이미 작성완료했습니다'
+        return render(request, 'planet/share_qna.html', {'error':error})
+
     return render(request, 'planet/create_qna_home.html')
 
 @login_required(login_url='/app/login/login')
@@ -48,7 +58,7 @@ def create_qna(request):
     )
     if Qna_question.objects.filter(Qna=new_qna).count() > 0:
         error = '이미 작성완료했습니다'
-        return render(request, 'planet/create_qna.html', {'error': error})
+        return render(request, 'planet/share_qna.html', {'error':error})
 
     if request.method == 'POST':
 

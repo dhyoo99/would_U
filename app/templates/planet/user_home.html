@@ -2,6 +2,15 @@
 {% load static %}
 {% block content %}
 
-<div style='color:white;'>this is user_home page</div>
+<div class="title">
+    <h1>This is the planet, <br> {{request.user.planet.name}}. </h1>
+</div>
+
+<div class="bottom">
+    <button class="button"><a href="{% url 'create_qna_home'%}">create QnA</a></button>
+    <br>
+    <button class="button">friend list</button>
+    <br>
+    <button class="button">rank</button>
 
 {% endblock content %}
