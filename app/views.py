@@ -96,6 +96,8 @@ def create_qna(request):
     return render(request, 'planet/create_qna.html', {'questions': questions})
 
 
+
+
 @login_required(login_url='/app/login/login')
 def solve_qna_home(request):
     return render(request, 'planet/solve_qna_home.html')
@@ -156,9 +158,9 @@ def solve_qna(request, qna_pk):
     return render(request, 'planet/solve_qna.html', {'qna_to_solve': qna_to_solve, 'qna_questions': qna_questions, 'planet_name': planet_name})
 
 
+
 def user_home(request):
     return render(request, 'planet/user_home.html')
-
 
 def score(request, score_pk):
     score = Score.objects.get(pk=score_pk)
@@ -211,6 +213,10 @@ def solve_signup(request, qna_pk):
     if request.method == 'GET':
         return render(request, 'registration/solve_signup.html', {'qna_pk': qna_pk})
 
+# solve/<int:qna_pk>/ 링크를 던져줘야 한다. 
+def share_qna(request, qna_pk):
+    
+    return render(request, 'planet/share_qna.html', {'qna_pk': qna_pk})
 
 def friend_list(request, user_pk):
     user = User.objects.get(pk=user_pk)
@@ -255,8 +261,7 @@ def result(request):
             i += 1
         return HttpResponse(json.dumps(result))
 
-def share_qna(request):
-    return render(request, 'planet/share_qna.html')
+
 
 @login_required(login_url='/app/login')
 def answer_detail(request):

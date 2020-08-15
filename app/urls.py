@@ -19,7 +19,7 @@ urlpatterns = [
 
     path('create_qna_home/', views.create_qna_home, name='create_qna_home'),
     path('create_qna/', views.create_qna, name='create_qna'),
-    path('share_qna/', views.share_qna, name='share_qna'),
+    path('share_qna/<int:qna_pk>', views.share_qna, name='share_qna'),
 
     path('solve_qna/<int:qna_pk>', views.solve_qna, name='solve_qna'),
     path('score/<int:score_pk>', views.score, name='score'),
@@ -28,7 +28,7 @@ urlpatterns = [
     path('answer_detail/', views.answer_detail, name='answer_detail'),  
     path('account/', views.account, name='account'),
     path('user_home/<int:user_pk>/', views.user_home, name='user_home'),
-    path('share_qna/', views.share_qna, name='share_qna'),
+    
     path('rank/<int:user_pk>', views.rank, name='rank'),
     path('friend_planet/<int:user_pk>',
          views.friend_planet, name='friend_planet'),
