@@ -124,3 +124,6 @@ def score(request, score_pk):
     d = createDistance(score_pk)
     print(d.distance)
     return render(request, 'planet/score.html', {'score': score})
+
+def share_qna(request):
+    return render(request, 'planet/share_qna.html')

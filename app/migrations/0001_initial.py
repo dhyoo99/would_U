@@ -11,15 +11,15 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('auth', '0012_alter_user_first_name_max_length'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='Planet',
             fields=[
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='auth.user')),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, related_name='planet', serialize=False, to='auth.user')),
                 ('name', models.CharField(max_length=100)),
             ],
         ),
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
             name='Qna',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='Qna', to=settings.AUTH_USER_MODEL)),
+                ('owner', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='Qna', to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
