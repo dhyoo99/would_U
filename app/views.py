@@ -14,6 +14,9 @@ def index(request):
     if request.method == 'POST':
         return redirect('/')
 
+def account(request):
+    return render(request, 'planet/account.html')
+
 
 def signup(request):
     if request.method == 'POST':
@@ -22,13 +25,12 @@ def signup(request):
             password = request.POST["password1"]
             planetname = request.POST["planetname"]
 
-            user = User.objects.create_user(
-                username=username, password=password)
+            user = User.objects.create_user(username=username, password=password)
             user.planet.name = planetname
             user.save()
             auth.login(request, user)
             return redirect('/app/')
-    return render(request, 'account/signup.html')
+    return render(request, 'registration/signup.html')
 
 
 @login_required(login_url='/app/login/login')
@@ -114,9 +116,14 @@ def solve_qna(request, qna_pk):
         return redirect('score', score.pk)
     return render(request, 'planet/solve_qna.html', {'qna_to_solve': qna_to_solve, 'qna_questions': qna_questions, 'planet_name': planet_name})
 
+def user_home(request):
+    return render(request, 'planet/user_home.html')
 
 def score(request, score_pk):
     score = Score.objects.get(pk=score_pk)
     d = createDistance(score_pk)
     print(d.distance)
     return render(request, 'planet/score.html', {'score': score})
+
+def share_qna(request):
+    return render(request, 'planet/share_qna.html')
