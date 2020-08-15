@@ -1,30 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+<link rel="stylesheet" href="../../static/app/share_qna.css" />
 {% endblock css %}
 
 {% block content %}
 
 <a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a>
 
-  <h1>
-    Great job! <br>
-    Share with <br>
-    friends :)
-  </h1>
-  <h2>
-    친구들에게 <br>
-    질문을 공유해보세요! <br>
-    과연 누가 가장 많이 <br>
-    내 정답을 맞출 수 있을까요?
-  </h2>
+<div class="total">
+  <div class="title">
+    <h1>
+      Great job! <br>
+      Share with <br>
+      friends :)
+    </h1>
+    <p>
+      친구들에게 <br>
+      질문을 공유해보세요! <br>
+      과연 누가 가장 많이 <br>
+      내 정답을 맞출 수 있을까요?
+    </p>
+    
+  </div>
+  <div class="copylink">
+    <input id="link" value="링크" />
+  </div>
+  <div class="buttons">
+    <button onclick="copyLink()">클립보드로 복사</button> 
+    <br>
 
-  <input id="link" value="wouldU" />
-  <button onclick="copyLink()">클립보드로 복사</button>
+    <!-- sns 공유하기 -->
+    <input id="kakao" type="button" onClick="shareKakaotalk();" value="카카오톡 공유하기"/>
+    <br>
+    <input id="facebook" type="button" onclick="shareFacebook();" value="페이스북 공유하기"/>
+  </div>
+</div>
 
-  <!-- sns 공유하기 -->
-  <input type="button" onClick="shareKakaotalk();" value="카카오톡 공유하기"/>
-  <input type="button" onclick="shareFacebook();" value="페이스북 공유하기"/>
+  
 
 <!-- script 코드 -->
 <script type="text/javascript">
@@ -48,8 +61,8 @@
         description:"누가 나와 가장 가까울까?", 
         imageUrl:"https://ko.forallcreators.com/wp-content/uploads/spica1.png", 
         link: {
-          mobileWebUrl:"https://wouldu.herokuapp.com/solve_qna_home/", 
-          webUrl:"https://wouldu.herokuapp.com/solve_qna_home/" 
+          mobileWebUrl:"https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/", 
+          webUrl:"https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/" 
         }
       }, 
       social: {
@@ -61,8 +74,8 @@
         {
           title:"우주(WouldU)로 가기", 
           link: {
-            mobileWebUrl:"https://wouldu.herokuapp.com/solve_qna_home/", 
-            webUrl:"https://wouldu.herokuapp.com/solve_qna_home/" 
+            mobileWebUrl:"https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/", 
+            webUrl:"https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/" 
           }
         }
       ]
@@ -70,7 +83,7 @@
   }
 
   function shareFacebook() {
-    var url = "https://mighty-dawn-50726.herokuapp.com/";
+    var url = "https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/";
     var encodeURL = encodeURIComponent(url);
     location.href="https://www.facebook.com/sharer/sharer.php?u=" + encodeURL;
   }
