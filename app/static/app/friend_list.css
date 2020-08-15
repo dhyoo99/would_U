@@ -94,7 +94,7 @@ a {
     justify-content: center;
     align-items: center;
     padding-top: 1rem;
-    padding-bottom: 1rem; 
+    padding-bottom: 1rem;
 }
 
 .friend_page {
@@ -107,10 +107,6 @@ a {
     font-size: 5vw;
     color: black;
 }
-
-/* .qnaRow {
-    line-height: 2rem;
-} */
 
 .qnaRow p {
     font-size: 1rem;
