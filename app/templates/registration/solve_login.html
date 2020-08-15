@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <title>wouldU</title>
+    <meta charset="UTF-8">
+    <title>solvelogin</title>
 </head>
 <body>
-    <div class="form">
-        <form method="post" action="{% url 'login' %}">
+    <div class="input">
+        <form method="post" action="{% url 'solve_login' qna_pk %}">
             {% csrf_token %}
-            <div>
+            <div class="id-pw">
                 <div>
                     <input name="username" type="text" placeholder="아이디" spellcheck="false">
                 </div>
@@ -18,12 +18,12 @@
             </div>
             <button type="submit">로그인</button>
         </form>
-        <div class="error">
-            <span>{{ error }}</span>
-        </div>
         <div>
-            <a href="{% url 'signup' %}">회원가입</a>
+            <a href="{% url 'solve_signup' qna_pk %}">회원가입</a>
         </div>
+    </div>
+    <div>
+        <span>{{ error }}</span>
     </div>
 </body>
 </html>

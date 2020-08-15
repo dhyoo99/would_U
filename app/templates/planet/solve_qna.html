@@ -1,7 +1,10 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block css %}
-{% endblock css %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>wouldU</title>
+</head>
 
 
 {% block content %}
@@ -26,9 +29,10 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
-    {% endfor %}
-    <button type="submit">done!</button>
-</form>
+        {% endfor %}
+        <button type="submit">done!</button>
+    </form>
 {% endif %}
-{% endblock content %}
+</body>
+
+</html>
