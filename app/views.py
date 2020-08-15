@@ -258,7 +258,7 @@ def result(request):
 
 
 @login_required(login_url='/app/login')
-def share_qna(request):
+def share_qna(request, qna_pk):
     return render(request, 'planet/share_qna.html')
 
 

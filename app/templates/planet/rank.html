@@ -1,29 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+<link rel="stylesheet" type="text/css" href="../../static/app/rank.css" />
+<link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+<script src="https://kit.fontawesome.com/703f0f4079.js" crossorigin="anonymous"></script>
 {% endblock css %}
 
 
 {% block content %}
-<div class="wrap">
-    <h2>Rank</h2>
-    <p>누가 가장 나와 가까울까?</p>
 
-    <table class="rankTable">
-        <tr>
-            <th>순위</th>
-            <th>이름</th>
-            <th>정답수</th>
-            <th>나와의 거리</th>
-        </tr>
-        {% for data in result%}
-        <tr>
-            <th>{{forloop.counter}}</th>
-            <th>{{data.name}}</th>
-            <th>{{data.score}} / 9 </th>
-            <th>{{data.distance}}</th>
-        </tr>
+<div class="wrap">
+    <div class='home_icon'>
+        <a href="{% url 'user_home' %}"><i class="fas fa-home"></i></a>
+    </div>
+    <h2 class="title">Rank</h2>
+    <p class="message">누가 가장<br>나와 가까울까?</p>
+
+    <div class="rankTable">
+        <div class="table_head">
+            <span>순위</span>
+            <span>이름</span>
+            <span>정답수</span>
+            <span>나와의 거리</span>
+        </div>
+        {% for data in result %}
+        <div class="table_row">
+
+            <span style="margin-left: 15px;">{{forloop.counter}}</span>
+            <span>{{data.name}}</span>
+            <span>{{data.score}} / 9</span>
+            <span style="margin-right: 5px;">{{data.distance}} 광년</span>
+
+        </div>
         {% endfor %}
-    </table>
+    </div>
 </div>
 {% endblock content %}
