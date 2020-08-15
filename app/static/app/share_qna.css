@@ -109,16 +109,6 @@ h1 {
   align-items: center;
 }
 
-.home{
-  background-color: black;
-  color:white;
-  position: absolute;
-  right: 1rem;
-  text-align: center;
-  padding-top: 1vh;
-  font-size: 2.5rem;
-} 
-
 .copylink {
   padding-top: 2rem;
   width: 80%;
@@ -127,4 +117,8 @@ h1 {
 #link {
   width: 100%;
   text-align: center;
+}
+
+img {
+  display: none;
 }

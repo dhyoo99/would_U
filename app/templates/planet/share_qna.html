@@ -6,8 +6,7 @@
 
 {% block content %}
 
-<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
-
+<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a>
 <div class="total">
   <div class="title">
     <h1>
@@ -21,72 +20,78 @@
       과연 누가 가장 많이 <br>
       내 정답을 맞출 수 있을까요?
     </p>
-    
+
   </div>
-  <div class="copylink">
-    <input id="link" value="https://wouldu.herokuapp.com/solve_qna/{{qna_pk}}"/>
+    <div class="copylink">
+      <input id="link" value="https://wouldu.herokuapp.com/solve_qna/{{qna_pk}}" />
+    </div>
+    <div class="buttons">
+      <button onClick="copyLink()">클립보드로 복사</button>
+      <br>
+
+      <!-- sns 공유하기 -->
+      <input id="kakao" type="button" onClick="shareKakaotalk();" value="카카오톡 공유하기" />
+      <br>
+      <input id="facebook" type="button" onClick="shareFacebook();" value="페이스북 공유하기" />
+    </div>
   </div>
-  <div class="buttons">
-    <button onclick="copyLink()">클립보드로 복사</button> 
-    <br>
 
-    <!-- sns 공유하기 -->
-    <input id="kakao" type="button" onClick="shareKakaotalk();" value="카카오톡 공유하기"/>
-    <br>
-    <input id="facebook" type="button" onclick="shareFacebook();" value="페이스북 공유하기"/>
-  </div>
-</div>
 
-  
 
-<!-- script 코드 -->
-<script type="text/javascript">
-  const link = document.getElementById("link")
+  <!-- script 코드 -->
+  <script type="text/javaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <script type="text/javascript">
+    const link = document.getElementById("link")
+    const solve_url = link.value
 
-  function copyLink() {
-    link.select();
-    document.execCommand("Copy");
-  }
 
-</script>
+    //console.log(solve_url)
 
-<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type="text/javascript">
-  function shareKakaotalk() {
-    Kakao.init("938593826d5c00ae4a36b31f67f2717e");
-    Kakao.Link.sendDefault({
-      objectType: "feed",
-      content: {
-        title: "나만의 우주 만들기: WouldU",
-        description: "누가 나와 가장 가까울까?",
-        imageUrl: "https://ko.forallcreators.com/wp-content/uploads/spica1.png",
-        link: {
-          mobileWebUrl: "https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/",
-          webUrl: "https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/"
-        }
-      },
-      social: {
-        likeCount: 325,
-        commentCount: 64,
-        sharedCount: 542
-      },
-      buttons: [
-        {
-          title: "우주(WouldU)로 가기",
+    function copyLink() {
+      link.select();
+      document.execCommand("Copy");
+    }
+
+    function shareKakaotalk() {
+      Kakao.init("938593826d5c00ae4a36b31f67f2717e");
+      Kakao.Link.sendDefault({
+        objectType: "feed",
+        content: {
+
+          title: "[우주:WouldU?] 신개념 심리테스트",
+          description: "우리 얼마나 가까운지 알아볼까? ",
+          imageUrl: "https://blogfiles.pstatic.net/MjAyMDA4MTZfMjc2/MDAxNTk3NTE5ODM2NTc1.-SAnq0FQnIq5uoEiyzgRDt0MqrufhP1MgNUAPUzhrrgg.kjMBUESzyyIj3NlcaVl80e_n1EPU5e1nS6gVQVSClBYg.PNG.tkso1357/thumbnail.png",
           link: {
-            mobileWebUrl: "https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/",
-            webUrl: "https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/"
+            mobileWebUrl: "https://mighty-dawn-50726.herokuapp.com/",
+            webUrl: "https://mighty-dawn-50726.herokuapp.com/"
+
           }
-        }
-      ]
-    });
-  }
+        },
+        social: {
+          likeCount: 325,
+          commentCount: 64,
+          sharedCount: 542
+        },
+        buttons: [
+          {
 
-  function shareFacebook() {
-    var url = "https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/";
-    var encodeURL = encodeURIComponent(url);
-    location.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURL;
-  }
-</script>
+            title: "문제풀기",
+            link: {
+              mobileWebUrl: "https://mighty-dawn-50726.herokuapp.com/",
+              webUrl: "https://mighty-dawn-50726.herokuapp.com/"
 
-{% endblock content %}
+            }
+          }
+        ]
+      });
+    }
+
+    function shareFacebook() {
+      var url = solve_url;
+      var encodeURL = encodeURIComponent(url);
+      location.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURL;
+    }
+
+  </script>
+
+  {% endblock content %}
