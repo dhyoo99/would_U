@@ -287,6 +287,7 @@ def result(request):
         return HttpResponse(json.dumps(result))
 
 
+
 @login_required(login_url='/app/login')
 def share_qna(request):
     return render(request, 'planet/share_qna.html')

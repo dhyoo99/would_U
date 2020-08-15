@@ -1,3 +1,132 @@
+* {
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  /* background-color: black; */
+  color: white;
+  margin: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  font-size: 10px;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../Group\ 11.png");
+  margin: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.qna_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.question {
+  color: white;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  font-size: 4.5rem;
+  word-break: keep-all;
+  text-align: center;
+  padding-bottom: 5vh;
+  position: absolute;
+  top: 0;
+  margin-top: 10vh;
+}
+
+.answer {
+  color: white;
+}
+
+p {
+  line-height: 24px;
+  font-size: 1.8rem;
+  letter-spacing: 0.3rem;
+}
+
+h1 {
+  font-size: 3.5rem;
+  text-align: center;
+}
+
+button.next {
+  width: 70vw;
+  height: 8vh;
+  background: #ffffff;
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+  border: 0px;
+  font-weight: 900;
+  font-size: 5vw;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10vh;
+}
+
+.account {
+  padding-left: 15vw;
+  padding-right: 15vw;
+  padding-top: 30vh;
+  padding-bottom: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* button.login {
+     margin-top: 40vh; 
+  } */
+
+a {
+  color: black;
+  background-color: white;
+  text-decoration: none;
+}
+
+input {
+  display: none;
+}
+
+.answer_radio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 800;
+}
+
+label {
+  width: 30vw;
+  height: 10vh;
+  border-radius: 20px;
+  background-color: white;
+  color: black;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  margin-left: 3vw;
+  margin-right: 3vw;
+  text-align: center;
+  vertical-align: middle;
+  padding-left: auto;
+  padding-right: auto;
+  font-size: 1.3rem;
+}
+
+label:active {
+  background-color: gainsboro;
+}
+=======
 @charset "utf-8";
 
 * {
