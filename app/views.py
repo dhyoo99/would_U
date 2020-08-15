@@ -255,7 +255,6 @@ def result(request):
             i += 1
         return HttpResponse(json.dumps(result))
 
-
 def share_qna(request):
     return render(request, 'planet/share_qna.html')
 
