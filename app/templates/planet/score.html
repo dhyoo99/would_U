@@ -3,11 +3,20 @@
 {% block css %}
 {% endblock css %}
 
-
 {% block content %}
-<div class='scoreBox'>
-    <p>Hmm... your score is</p>
-    <h2>{{score.score}} / {{score.qna.Qna_questions.count}}</h2>
+
+<div class='scorebox'>
+  <p>Hmm... your score is</p>
+  <h1>{{score.score}} / {{score.qna.Qna_questions.count}}</h1>
 </div>
+
+<h2>
+  친구에 대해 <br>
+  이 정도로 알고있군요! <br>
+  당신의 문제도 만들어보실래요?
+</h2>
+
+<a href="{% url 'answer_detail' %}">정답 상세 보기</a>
+<a href="{% url 'create_qna' %}">내 문제도 만들기</a>
 
 {% endblock content %}
