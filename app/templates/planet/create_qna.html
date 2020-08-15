@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="">
+<link rel="stylesheet" href="{% static 'app/create_qna.css' %}">
 {% endblock css %}
 
 
@@ -12,7 +12,14 @@
 {% if error %}
     <p>{{error}}</p>
 {% else %}
-    <div></div>
+    <div class="script">
+        스페이스 X에서  지구를 떠나 <br>
+        새로운 행성으로 이주하는 <br>
+        <span>“The new planet”</span><br>
+        프로젝트 참가자로 <br>
+        당신이 선발되었다. <br>
+    </div>
+    <button class="next"> next → </button>
     <div>
         <form method="post">
             {% csrf_token %}
@@ -32,11 +39,13 @@
                     </div>
                 </div>
             </div>
-            <button> next → </button>
+            <button class="before"> before ← </button>
+            <button class="next" onclick="tell()"> next → </button>
             {% endfor %}
-            <button type="submit" href="{% url 'share_qna' %}">done!</button>
+            <!-- <button id="" type="submit" href="{% url 'share_qna' %}">done!</button> -->
         </form>
     </div>
+    <script src="{% static 'app/create_qna.js' %}"></script>
 {% endif %}
 
 {% endblock content %}
