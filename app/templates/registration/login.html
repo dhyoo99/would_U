@@ -2,6 +2,6 @@
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="hidden" name="next" value="{{next}}" />
+    <input type="hidden" name="next" value="{%url 'user_home'%}" />
     <input type="submit" value="로그인" />
 </form>

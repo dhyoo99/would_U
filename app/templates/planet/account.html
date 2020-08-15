@@ -20,16 +20,9 @@
 
 <div class="bottom">
     <div class="login">
-        {% if user.is_authenticated %}
-        {{ user.username }}님, 안녕하세요
+        <button class="button"><a href="{% url 'login'%}?next={{request.path}}">log in </a></button>
         <br>
-        나의 행성이름: {{user.planet.name}}
-        <br>
-        <a href="{% url 'logout'%}?next={{request.path}}">로그아웃</a>
-        {%else%}
-        <a href="{% url 'signup' %}">sign up</a>
-        <a href="{% url 'login'%}?next={{request.path}}">log in </a>
-        {%endif%}
+        <button class="button"><a href="{% url 'signup' %}">sign up</a></button>
     </div>
 </div>
 
