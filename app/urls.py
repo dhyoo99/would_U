@@ -9,4 +9,8 @@ urlpatterns = [
     path('create_qna/', views.create_qna, name='create_qna'),
     path('solve_qna/<int:qna_pk>', views.solve_qna, name='solve_qna'),
     path('score/<int:score_pk>', views.score, name='score'),
+    path('friend_list/<int:user_pk>', views.friend_list, name='friend_list'),
+
+    # friend_list의 결과가져옴
+    path('result', views.result, name='result'),
 ]
