@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="title">
-    <h1>This is the planet, <br> {{user.planetname}}. </h1>
+    <h1>This is the planet, <br> {{request.user.planet.name}}. </h1>
 </div>
 
 <div class="bottom">
