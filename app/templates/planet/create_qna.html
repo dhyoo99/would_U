@@ -5,29 +5,34 @@
 
 
 {% block content %}
+
+<a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a>
+
 {% if error %}
-<p>{{error}}</p>
+    <p>{{error}}</p>
 {% else %}
-<form method="post">
-    {% csrf_token %}
-    {% for question in questions %}
-    <div class='qna_box' id='question-{{forloop.counter}}'>
-        <div class='question'>
-            <span>Q {{forloop.counter}}.</span>
-            <p>{{question.content}}</p>
-        </div>
-        <div class='answer'>
-            <div class='answer_radio'>
-                {% for option in question.options.all %}
-                <label>{{option.content}}
-                    <input type="radio" name="{{option.question.pk}}" value={{option.pk}}>
-                </label>
-                {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+        <div class='qna_box' id='question-{{forloop.counter}}'>
+            <div class='question'>
+                <span>Q {{forloop.counter}}.</span>
+                <p>{{question.content}}</p>
+            </div>
+            <div class='answer'>
+                <div class='answer_radio'>
+                    {% for option in question.options.all %}
+                    <label>{{option.content}}
+                        <input type="radio" name="{{option.question.pk}}" value={{option.pk}}>
+                    </label>
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
-    <button type="submit" href="{% url 'share_qna' %}">done!</button>
-</form>
+        <button> next → </button>
+        {% endfor %}
+        <button type="submit" href="{% url 'share_qna' %}">done!</button>
+    </form>
 {% endif %}
+
 {% endblock content %}

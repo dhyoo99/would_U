@@ -5,6 +5,8 @@
 
 {% block content %}
 
+<a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a> 
+
 <div class='scorebox'>
   <p>Hmm... your score is</p>
   <h1>{{score.score}} / {{score.qna.Qna_questions.count}}</h1>
