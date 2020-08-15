@@ -22,8 +22,7 @@ def signup(request):
             password = request.POST["password1"]
             planetname = request.POST["planetname"]
 
-            user = User.objects.create_user(
-                username=username, password=password)
+            user = User.objects.create_user(username=username, password=password)
             user.planet.name = planetname
             user.save()
             auth.login(request, user)
