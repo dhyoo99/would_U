@@ -188,8 +188,6 @@ def solve_qna(request, qna_pk):
 
     return render(request, 'planet/solve_qna.html', {'qna_to_solve': qna_to_solve, 'qna_questions': qna_questions, 'planet_name': planet_name})
 
-
-
 def user_home(request):
     return render(request, 'planet/user_home.html')
 
@@ -198,7 +196,6 @@ def score(request, score_pk):
     d = createDistance(score_pk)
     print(d.distance)
     return render(request, 'planet/score.html', {'score': score})
-
 
 def solve_login(request, qna_pk):
     if request.method == 'POST':
@@ -293,13 +290,6 @@ def result(request):
         return HttpResponse(json.dumps(result))
 
 
-<<<<<<< HEAD
-=======
-
-@login_required(login_url='/app/login')
-def share_qna(request):
-    return render(request, 'planet/share_qna.html')
->>>>>>> f01edbfdf0025b1fe45037291a785f5127ed228d
 
 
 @login_required(login_url='/app/login')
