@@ -26,17 +26,47 @@ def account(request):
 
 def signup(request):
     if request.method == 'POST':
-        if request.POST['password1'] == request.POST['password2']:
-            username = request.POST["username"]
-            password = request.POST["password1"]
-            planetname = request.POST["planetname"]
+        username = request.POST["username"]
+        password1 = request.POST["password1"]
+        password2 = request.POST["password2"]
+        planetname = request.POST["planetname"]
 
-            user = User.objects.create_user(
-                username=username, password=password)
-            user.planet.name = planetname
-            user.save()
+        if username == "":
+            error = "아이디를 입력해주세요."
+            return render(request, 'registration/signup.html', {'error': error})
+
+        elif password1 == "" or password2 == "":
+            error = "비밀번호를 입력해주세요."
+            return render(request, 'registration/signup.html', {'error': error})
+
+        elif planetname == "":
+            error = "행성 이름을 입력해주세요."
+            return render(request, 'registration/signup.html', {'error': error})
+
+        if password1 == password2:
+
+            try:
+                user = User.objects.create_user(
+                    username=username, password=password1)
+
+                if Planet.objects.filter(name=planetname).count() > 0:
+                    error = "중복된 행성 이름입니다."
+                    return render(request, 'registration/signup.html', {'error': error})
+
+                else:
+                    user.planet.name = planetname
+                    user.save()
+
+            except:
+                error = "중복된 아이디입니다."
+                return render(request, 'registration/signup.html', {'error': error})
+
             auth.login(request, user)
             return redirect('user_home')
+
+        else:
+            error = "비밀번호가 일치하지 않습니다."
+            return render(request, 'registration/signup.html', {'error': error})
 
     return render(request, 'registration/signup.html')
 
@@ -212,6 +242,13 @@ def solve_signup(request, qna_pk):
     if request.method == 'GET':
         return render(request, 'registration/solve_signup.html', {'qna_pk': qna_pk})
 
+# solve/<int:qna_pk>/ 링크를 던져줘야 한다.
+
+
+def share_qna(request, qna_pk):
+
+    return render(request, 'planet/share_qna.html', {'qna_pk': qna_pk})
+
 
 def friend_list(request, user_pk):
     user = User.objects.get(pk=user_pk)
@@ -255,11 +292,6 @@ def result(request):
             result[f'{i}'] = data
             i += 1
         return HttpResponse(json.dumps(result))
-
-
-@login_required(login_url='/app/login')
-def share_qna(request, qna_pk):
-    return render(request, 'planet/share_qna.html')
 
 
 @login_required(login_url='/app/login')
