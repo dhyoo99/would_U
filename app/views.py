@@ -5,8 +5,14 @@ from django.shortcuts import redirect
 from .models import Planet, Qna, Question, Option, Qna_question, Answer, Choice, Score, Distance
 from django.contrib.auth.decorators import login_required
 from .distance import createDistance
+<<<<<<< HEAD
 from django.contrib.auth import login as django_login
 from django.contrib.auth import authenticate as django_authenticate
+=======
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+import json
+>>>>>>> be9dbbf25fe00f84e4b9dd0e5b5948bf288c8bc5
 
 
 def index(request):
@@ -19,7 +25,6 @@ def index(request):
 def account(request):
     return render(request, 'planet/account.html')
 
-
 def signup(request):
     if request.method == 'POST':
         if request.POST['password1'] == request.POST['password2']:
@@ -31,12 +36,29 @@ def signup(request):
             user.planet.name = planetname
             user.save()
             auth.login(request, user)
+<<<<<<< HEAD
             return redirect('user_home')
 
+=======
+            return redirect('/app/user_home/', {"user":user})
+>>>>>>> be9dbbf25fe00f84e4b9dd0e5b5948bf288c8bc5
     return render(request, 'registration/signup.html')
+
+def user_home(request):
+    return render(request, 'planet/user_home.html')
 
 @login_required(login_url='/app/login/login')
 def create_qna_home(request):
+    questions = Question.objects.all()
+
+    new_qna = Qna.objects.get(
+        owner=request.user
+    )
+
+    if Qna_question.objects.filter(Qna=new_qna).count() > 0:
+        error = '이미 작성완료했습니다'
+        return render(request, 'planet/share_qna.html', {'error':error})
+
     return render(request, 'planet/create_qna_home.html')
 
 @login_required(login_url='/app/login/login')
@@ -48,7 +70,7 @@ def create_qna(request):
     )
     if Qna_question.objects.filter(Qna=new_qna).count() > 0:
         error = '이미 작성완료했습니다'
-        return render(request, 'planet/create_qna.html', {'error': error})
+        return render(request, 'planet/share_qna.html', {'error':error})
 
     if request.method == 'POST':
 
@@ -129,9 +151,6 @@ def solve_qna(request, qna_pk):
 
     return render(request, 'planet/solve_qna.html', {'qna_to_solve': qna_to_solve, 'qna_questions': qna_questions, 'planet_name': planet_name})
 
-def user_home(request):
-    return render(request, 'planet/user_home.html')
-
 def score(request, score_pk):
     score = Score.objects.get(pk=score_pk)
     d = createDistance(score_pk)
@@ -181,6 +200,48 @@ def solve_signup(request, qna_pk):
     if request.method == 'GET':
         return render(request, 'registration/solve_signup.html', {'qna_pk': qna_pk})
 
+def friend_list(request, user_pk):
+    user = User.objects.get(pk=user_pk)
+    user_qna = Qna.objects.get(owner=user)
+
+    scores = Score.objects.filter(qna=user_qna)
+
+    return render(request, 'planet/friend_list.html', {'scores': scores, 'owner': user})
+
+
+# friend_list 에서 결과 가져오는 함수
+@csrf_exempt
+def result(request):
+    if request.method == "POST":
+        request_body = json.loads(request.body)
+        print(request_body)
+        friend_pk = request_body['friend_pk']
+        owner_pk = request_body['owner_pk']
+
+        friend = User.objects.get(pk=friend_pk)
+        owner = User.objects.get(pk=owner_pk)
+
+        qna = Qna.objects.get(owner=owner)
+
+        qna_questions = Qna_question.objects.filter(Qna=qna)
+        print(qna)
+        result = {}
+        i = 1
+        for pair in qna_questions:
+            choice = Choice.objects.get(solver=friend, qna_question=pair)
+            if choice.isAnswer == True:
+                isAnswer = 'true'
+            else:
+                isAnswer = 'false'
+            data = {
+                "question": pair.question.content,
+                "answer": choice.option.content,
+                "isAnswer": isAnswer
+            }
+            result[f'{i}'] = data
+            i += 1
+        return HttpResponse(json.dumps(result))
+      
 @login_required(login_url='/app/login/login')
 def share_qna(request):
     return render(request, 'planet/share_qna.html')

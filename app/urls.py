@@ -12,21 +12,37 @@ urlpatterns = [
     path('solve_qna/<int:qna_pk>/solve_signup/', views.solve_signup, name='solve_signup'),
     path('score/<int:score_pk>/', views.score, name='score'),
 
+    path('user_home/', views.user_home, name='user_home'), 
+
 
     path('create_qna_home/', views.create_qna_home, name='create_qna_home'),
-
     path('create_qna/', views.create_qna, name='create_qna'),
     path('share_qna/', views.share_qna, name='share_qna'),
 
+<<<<<<< HEAD
     path('solve_qna/<int:qna_pk>/', views.solve_qna, name='solve_qna'),
     path('score/<int:score_pk>/', views.score, name='score'),
 
+=======
+    path('solve_qna_home/', views.solve_qna_home, name='solve_qna_home'),
+    path('solve_qna/<int:qna_pk>', views.solve_qna, name='solve_qna'),
+    path('score/<int:score_pk>', views.score, name='score'),
+    path('friend_list/<int:user_pk>', views.friend_list, name='friend_list'),
+>>>>>>> be9dbbf25fe00f84e4b9dd0e5b5948bf288c8bc5
     path('result_qna/', views.result_qna, name='result_qna'), 
     path('answer_detail/', views.answer_detail, name='answer_detail'), 
     
     path('account/', views.account, name='account'),
+<<<<<<< HEAD
     path('user_home/<int:user_pk>/', views.user_home, name='user_home'),
     path('share_qna/', views.share_qna, name='share_qna'),
 
     path('rank/<int:user_pk>/', views.rank, name='rank'),
+=======
+    path('user_home/', views.user_home, name='user_home'),
+    path('share_qna/', views.share_qna, name='share_qna'),
+  
+  # friend_list의 결과가져옴
+    path('result', views.result, name='result'),
+>>>>>>> be9dbbf25fe00f84e4b9dd0e5b5948bf288c8bc5
 ]

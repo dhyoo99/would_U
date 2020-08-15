@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock css %}
+
+
+{% block content %}
+<div class="friend_list">
+    <h2>Friend List</h2>
+    <p>친구들이 내 정답을 얼마나 맞췄을까?</p>
+
+    <div class="friend_select">
+        <select name="friend" id="friend" onchange="getResult()">
+            {% for score in scores %}
+            <option value="{{score.user.pk}}">{{score.user.planet.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="qna" id="qna-js" style="overflow: scroll; width: 300px; height: 500px;">
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script>
+    const friendSelect = document.querySelector('#friend')
+    const qnaBox = document.querySelector('#qna-js')
+
+    const showResult = function (response) {
+        qnaBox.querySelectorAll('*').forEach(n => n.remove())
+
+        const data = response.data
+        for (i in data) {
+            const qnaRow = document.createElement('div')
+            qnaRow.setAttribute('class', 'qnaRow')
+
+            const questionBox = document.createElement('p')
+            qnaRow.appendChild(questionBox)
+
+            questionBox.textContent = `Q. ${i}  ${data[i].question}`
+
+            const answerBox = document.createElement('p')
+            qnaRow.appendChild(answerBox)
+            const isAnswer = (data[i].isAnswer === 'true') ? '정답' : '오답'
+
+            answerBox.textContent = `친구의 답: ${data[i].answer}    ${isAnswer}`
+
+            qnaBox.appendChild(qnaRow)
+        }
+    }
+    const getResult = () => {
+        console.log(friendSelect.value)
+        axios.post('/app/result', { friend_pk: `${friendSelect.value}`, owner_pk: "{{owner.pk}}" })
+            .then(response => {
+                console.log(response)
+                showResult(response)
+            })
+    }
+
+    getResult() 
+</script>
+{% endblock content %}
