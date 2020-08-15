@@ -24,7 +24,7 @@ urlpatterns = [
          views.answer_detail, name='answer_detail'),
     path('account/', views.account, name='account'),
     path('user_home/<int:user_pk>/', views.user_home, name='user_home'),
-    
+    path('friend_list/<int:user_pk>', views.friend_list, name='friend_list'),
     path('rank/<int:user_pk>', views.rank, name='rank'),
     path('friend_planet/<int:user_pk>',
          views.friend_planet, name='friend_planet'),
