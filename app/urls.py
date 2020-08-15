@@ -6,11 +6,23 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('signup/', views.signup, name='signup'),
 
+
+    path('create_qna_home/', views.create_qna_home, name='create_qna_home'),
+
     path('create_qna/', views.create_qna, name='create_qna'),
+    path('share_qna/', views.share_qna, name='share_qna'),
+
+    path('solve_qna_home/', views.solve_qna_home, name='solve_qna_home'),
     path('solve_qna/<int:qna_pk>', views.solve_qna, name='solve_qna'),
     path('score/<int:score_pk>', views.score, name='score'),
     path('friend_list/<int:user_pk>', views.friend_list, name='friend_list'),
-
-    # friend_list의 결과가져옴
+    path('result_qna/', views.result_qna, name='result_qna'), 
+    path('answer_detail/', views.answer_detail, name='answer_detail'), 
+    
+    path('account/', views.account, name='account'),
+    path('signup/user_home/', views.user_home, name='user_home'),
+    path('share_qna/', views.share_qna, name='share_qna'),
+  
+  # friend_list의 결과가져옴
     path('result', views.result, name='result'),
 ]

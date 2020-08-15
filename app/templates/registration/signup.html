@@ -1,0 +1,31 @@
+<h1> sign up </h1>
+
+<form method="POST" action="{%url 'signup' %}">
+    {% csrf_token %}
+    <div class="signup1">
+        ID:
+        <br>
+        <input name="username" type="text" value="">
+        <br>
+        <br>
+        PW:
+        <br>
+        <input name="password1" type="password" value="">
+        <br>
+        <br>
+        PW 확인:
+        <br>
+        <input name="password2" type="password" value="">
+    </div>
+    
+    <div class="signup2">
+        planet name
+        <br>
+        당신만의 고유한 행성이름을 지어주세요
+        <br>
+        <input name="planetname" type="text" value="">
+        <br>
+        <br>
+        <button type="submit" class="signup"><a href="/app/signup/user_home/">done</a></button>
+    </div>
+</form>

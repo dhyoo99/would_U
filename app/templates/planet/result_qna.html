@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+
+<h1>
+  hmm... your score is 
+</h1>
+<h2>
+  친구에 대해 <br>
+  이 정도로 알고있군요! <br>
+  당신의 문제도 만들어보실래요?
+</h2>
+
+<a href="{% url 'answer_detail' %}">정답 상세 보기</ㅁ>
+<a href="{% url 'create_qna' %}">내 문제도 만들기</a>
+
+
+
+
+{% endblock content %}
