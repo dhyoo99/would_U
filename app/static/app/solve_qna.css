@@ -57,29 +57,18 @@ body {
   color: white;
 }
 
-p {
-  line-height: 24px;
-  font-size: 1.8rem;
-  letter-spacing: 0.3rem;
-}
-
 h1 {
-  font-size: 3.5rem;
-  text-align: center;
+    width: 40vw;
+    padding-left: 10vw;
+    font-size: 3.5rem;
 }
 
-button.next {
-  width: 70vw;
-  height: 8vh;
-  background: #ffffff;
-  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25);
-  border-radius: 40px;
-  border: 0px;
-  font-weight: 900;
-  font-size: 5vw;
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 10vh;
+h2 {
+    width: 60vw;
+    padding-left: 10vw;
+    line-height: 24px;
+    font-size: 1.8rem;
+    letter-spacing: 0.3rem;
 }
 
 .account {
@@ -184,7 +173,7 @@ label:active {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 33vw;
+    width: 70vw;
     height: 8vh;
     background-color: #ffffff;
     box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25);
@@ -192,4 +181,13 @@ label:active {
     border: 0px;
     font-weight: 900;
     font-size: 5vw;
+    position: absolute;
+    bottom: 10vh;
+    margin-left: 15vw;
 }
+
+p {
+    line-height: 24px;
+    font-size: 1.8rem;
+    letter-spacing: 0.3rem;
+  }
