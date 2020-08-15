@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/answer_detail.css' %}">
 {% endblock css %}
 
 
 {% block content %}
+
+<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
+
 <div class="wrap">
-    <h2>answer detail</h2>
-    <p>{{owner.planet.name}} 주인의 정답 공개</p>
-
-    <div class="qna" id="qna-js" style="overflow: scroll; width: 300px; height: 500px;">
-
+    <h2>What is <br> Answer?</h2>
+    <p>{{request.user.planet.name}}의 정답 공개</p>
+    
+    <div class="qna_box">
+        <div class="qna" id="qna-js" style="overflow: scroll;"></div>
     </div>
-
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
@@ -27,24 +30,33 @@
             const qnaRow = document.createElement('div')
             qnaRow.setAttribute('class', 'qnaRow')
 
-            const questionBox = document.createElement('p')
+            const questionBox = document.createElement('div')
+            questionBox.setAttribute('class', 'questionBox')
             qnaRow.appendChild(questionBox)
 
             questionBox.textContent = `Q${i}.  ${data[i].question}`
+            const textBox = document.createElement('div')
+            textBox.setAttribute('class', 'textBox')
+            qnaRow.appendChild(textBox)
 
             const answerBox = document.createElement('p')
-            qnaRow.appendChild(answerBox)
+            textBox.appendChild(answerBox)
             answerBox.textContent = `정답: ${data[i].answer}`
 
             const choiceBox = document.createElement('p')
-            qnaRow.appendChild(choiceBox)
+            textBox.appendChild(choiceBox)
             choiceBox.textContent = `나의 답: ${data[i].choice}`
 
             const compareBox = document.createElement('p')
-            qnaRow.appendChild(compareBox)
-            const isAnswer = (data[i].isAnswer === 'true') ? '정답!' : '오답!'
+            textBox.appendChild(compareBox)
+            const isAnswer = (data[i].isAnswer === 'true') ? '(O)' : '(X)'
             compareBox.textContent = `${isAnswer}`
-
+            if (compareBox.textContent === '(X)') {
+                questionBox.style.color = 'red';
+                answerBox.style.color = 'red';
+                choiceBox.style.color = 'red';
+                compareBox.style.color = 'red';
+            }
             qnaBox.appendChild(qnaRow)
         }
     }
