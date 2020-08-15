@@ -15,22 +15,23 @@
     <h1>log in </h1>
 </div>
 <div class="bottom">
-    <div class="form">
-        <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            <div>
-                <div>
-                    <input name="username" id="input" type="text" placeholder="ID" spellcheck="false">
-                </div>
-                <div>
-                    <input name="password" id="input" type="password" placeholder="password">
-                </div>
-            </div>
-            <button type="submit">로그인</button>
-        </form>
-        <div class="error">
-            <span>{{ error }}</span>
-        </div>
+    <div class="error">
+        <span>{{ error }}</span>
     </div>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="id">
+            <h2>ID</h2>
+            <input name="username" id="input" type="text" placeholder="ex. joohye" spellcheck="false">
+        </div>
+        <div class="pw">
+            <h2>P/W</h2>
+            <input name="password" id="input" type="password" placeholder="ex. 1234">
+        </div>
+        <div class="button">
+            <button type="submit" class="submit">로그인</button>
+        </div>
+    </form>
+
 </div>
 {% endblock content %}

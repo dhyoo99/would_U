@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a> 
+<a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a>
 
 <div class='scorebox'>
   <p>Hmm... your score is</p>
@@ -18,7 +18,7 @@
   당신의 문제도 만들어보실래요?
 </h2>
 
-<a href="{% url 'answer_detail' %}">정답 상세 보기</a>
+<a href="{% url 'answer_detail' score.pk %}">정답 상세 보기</a>
 <a href="{% url 'create_qna' %}">내 문제도 만들기</a>
 
 {% endblock content %}
