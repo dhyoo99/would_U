@@ -1,32 +1,45 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+<link rel="stylesheet" type="text/css" href="../../static/app/friend_planet.css" />
+<link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+<script src="https://kit.fontawesome.com/703f0f4079.js" crossorigin="anonymous"></script>
 {% endblock css %}
-
 
 {% block content %}
 
-<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
 
 <div class="wrap">
-    <h2>Friend's planet: {{owner_planet.name}}</h2>
-    <p>친구와 가까운 행성들</p>
+    <div class="top">
+        <h2 class="title">Friend's planet: {{owner_planet.name}}</h2>
+        <a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a>
+    </div>
+    <p class="message">친구와 가까운 행성들</p>
 
-    <table class="rankTable">
-        <tr>
-            <th>순위</th>
-            <th>이름</th>
-            <th>정답수</th>
-            <th>거리</th>
-        </tr>
+    <div class="rankTable">
+        <div class="table_head">
+            <span>순위</span>
+            <span>이름</span>
+            <span>정답수</span>
+            <span style="margin-right: 20px;">거리</span>
+        </div>
+        {% if result %}
         {% for data in result%}
-        <tr>
-            <th>{{forloop.counter}}</th>
-            <th>{{data.name}}</th>
-            <th>{{data.score}} / 9 </th>
-            <th>{{data.distance}}</th>
-        </tr>
+        <div class="table_row">
+            <span style="margin-left:15px;">{{forloop.counter}}</span>
+            <span>{{data.name}}</span>
+            <span>{{data.score}} / 9 </span>
+            <span style="margin-right: 5px;">{{data.distance}} 광년</span>
+        </div>
         {% endfor %}
-    </table>
+        {% else %}
+        <div class="table_row" style="display: flex; justify-content: center;">
+            <span>아직 문제를 푼 친구가 없어요!</span>
+        </div>
+        {% endif %}
+    </div>
+    <a class="back" href="{% url 'friend_list' request.user.pk %}">back</a>
 </div>
 {% endblock content %}

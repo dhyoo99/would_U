@@ -55,8 +55,6 @@ def signup(request):
                         username=username, password=password1)
                     user.planet.name = planetname
                     user.save()
-                    
-
 
             except:
                 error = "중복된 아이디입니다."
@@ -82,7 +80,7 @@ def create_qna_home(request):
 
     if Qna_question.objects.filter(Qna=new_qna).count() > 0:
         error = '이미 작성완료했습니다'
-        return render(request, 'planet/share_qna.html', {'error': error})
+        return redirect('share_qna', new_qna.pk)
 
     return render(request, 'planet/create_qna_home.html')
 
@@ -96,7 +94,7 @@ def create_qna(request):
     )
     if Qna_question.objects.filter(Qna=new_qna).count() > 0:
         error = '이미 작성완료했습니다'
-        return render(request, 'planet/share_qna.html', {'error': error})
+        return redirect('share_qna', new_qna.pk)
 
     if request.method == 'POST':
 
@@ -119,7 +117,7 @@ def create_qna(request):
 
         qna_pk = new_qna.pk
         # share_qna로 redirect하게 수정 필요
-        return redirect('/app/share_qna', qna_pk)
+        return redirect('share_qna', new_qna.pk)
 
     return render(request, 'planet/create_qna.html', {'questions': questions})
 

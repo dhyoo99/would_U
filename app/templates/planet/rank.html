@@ -26,6 +26,7 @@
             <span>정답수</span>
             <span style="margin-right: 20px;">나와의 거리</span>
         </div>
+        {% if result %}
         {% for data in result %}
         <div class="table_row">
 
@@ -36,6 +37,11 @@
 
         </div>
         {% endfor %}
+        {% else %}
+        <div class="table_row" style="display: flex; justify-content: center;">
+            <span>아직 문제를 푼 친구가 없어요!</span>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock content %}

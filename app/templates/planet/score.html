@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/score.css' %}">
 {% endblock css %}
 
 {% block content %}
@@ -20,7 +21,9 @@
 </div>
 
 
-<a href="{% url 'answer_detail' score.pk %}">정답 상세 보기</a>
-<a href="{% url 'create_qna' %}">내 문제도 만들기</a>
+<div class = 'buttons'>
+  <button class='button'><a href="{% url 'answer_detail' score.pk %}">정답 상세 보기</a></button>
+  <button class='button'><a href="{% url 'create_qna' %}">내 문제도 만들기</a></button>
+</div>
 
 {% endblock content %}
