@@ -7,25 +7,25 @@
 
 {% block content %}
 <div class="title">
-    <h1>This is <br> the planet, <br> {{request.user.planet.name}}. </h1>
+    <h1>Hello,<br> this is planet <br> {{request.user.planet.name}} :) </h1>
 </div>
 
 <div class="bottom">
     <div class="buttons">
         <button class="button">
             <a href="{% url 'create_qna_home'%}">
-                create QnA <br> 내 문제 만들기 
+                create QnA <br> 내 문제 만들기
             </a>
         </button>
         <br>
         <button class="button">
-            <a href="/app/friend_list/{{user.id}}">
+            <a href="{% url 'friend_list' request.user.pk %}">
                 friend list <br> 친구 행성 목록
             </a>
         </button>
         <br>
         <button class="button">
-            <a href="/app/rank/{{user.id}}">
+            <a href="{% url 'rank' request.user.pk %}">
                 rank <br> 순위 보기
             </a>
         </button>

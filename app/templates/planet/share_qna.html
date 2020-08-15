@@ -8,6 +8,7 @@
 
 <a href="{% url 'user_home'%}"><img class="home" src="../../static/image 16.png"></a> 
 
+
 <div class="total">
   <div class="title">
     <h1>
@@ -36,14 +37,15 @@
     <input id="facebook" type="button" onClick="shareFacebook();" value="페이스북 공유하기"/>
   </div>
 </div>
-<img id="image" src="../../../../../Downloads/thumbnail.png" />
+
+
 
 <!-- script 코드 -->
 <script type="text/javaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
   const link = document.getElementById("link")
   const solve_url = link.value
-  const img = document.getElementById("image")
+  
 
   //console.log(solve_url)
 
@@ -53,29 +55,33 @@
   }
 
   function shareKakaotalk() {
-    Kakao.init("938593826d5c00ae4a36b31f67f2717e");    
+    Kakao.init("938593826d5c00ae4a36b31f67f2717e");
     Kakao.Link.sendDefault({
-      objectType:"feed", 
+      objectType: "feed",
       content: {
+
         title:"[우주:WouldU?] 신개념 심리테스트", 
         description:"우리 얼마나 가까운지 알아볼까? ", 
         imageUrl:"https://blogfiles.pstatic.net/MjAyMDA4MTZfMjc2/MDAxNTk3NTE5ODM2NTc1.-SAnq0FQnIq5uoEiyzgRDt0MqrufhP1MgNUAPUzhrrgg.kjMBUESzyyIj3NlcaVl80e_n1EPU5e1nS6gVQVSClBYg.PNG.tkso1357/thumbnail.png", 
         link: {
           mobileWebUrl:"https://mighty-dawn-50726.herokuapp.com/", 
           webUrl:"https://mighty-dawn-50726.herokuapp.com/" 
+
         }
-      }, 
+      },
       social: {
-        likeCount:325, 
-        commentCount:64, 
-        sharedCount:542     
-      }, 
+        likeCount: 325,
+        commentCount: 64,
+        sharedCount: 542
+      },
       buttons: [
         {
+
           title:"문제풀기", 
           link: {
             mobileWebUrl:"https://mighty-dawn-50726.herokuapp.com/", 
             webUrl:"https://mighty-dawn-50726.herokuapp.com/" 
+
           }
         }
       ]
@@ -85,7 +91,7 @@
   function shareFacebook() {
     var url = solve_url;
     var encodeURL = encodeURIComponent(url);
-    location.href="https://www.facebook.com/sharer/sharer.php?u=" + encodeURL;
+    location.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURL;
   }
 
 </script>

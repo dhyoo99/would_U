@@ -1,0 +1,69 @@
+* {
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
+  }
+
+html {
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    /* background-color: black; */
+    color: white;
+    margin: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+    font-size: 10px;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-image: url("../Group\ 11-2.png");
+    margin: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.scorebox {
+    color: white;
+    padding-left: 10vw;
+    padding-top: 5vh;
+    font-size: 4.5rem;
+}
+
+.scorebox p {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.bottom {
+    padding-left: 10vw;
+}
+
+.bottom p {
+    font-size: 1.5rem;
+}
+
+button.button {
+    width: 70vw;
+    height: 8vh;
+    background: #ffffff;
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+    border: 0px;
+    font-weight: 900;
+    font-size: 2rem;
+    margin: 1rem;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+.buttons{
+    margin-top: 7rem;
+    margin-right: auto;
+    width: min-content;
+    margin-left: auto;
+}
