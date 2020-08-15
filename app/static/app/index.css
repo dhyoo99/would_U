@@ -1,5 +1,5 @@
 * {
-  
+  box-sizing: border-box;
   text-decoration: none;
 }
 
@@ -9,8 +9,11 @@ html {
   /* background-color: antiquewhite; */
   font-family: "Montserrat", sans-serif;
   width: 100%;
-  color: rgb(122, 92, 92);
-  
+  /* background-color: black; */
+  color: white;
+  margin: 0px;
+  box-sizing: border-box;
+  padding: 0px;
   font-size: 10px;
   
   /* background: url("../app/Group\ 7.png") no-repeat center center fixed;
@@ -28,8 +31,9 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position-y: bottom;
   margin: 0;
+  
+
 }
 
 .title {
@@ -37,12 +41,8 @@ body {
   font-size: 4.5rem;
   width: 100%;
   padding-top: 5vh;
+  padding-left: 10vw;
 
-}
-
-.bottom {
-  color: white;
-  background-color: transparent;
 }
 
 button.enter {
