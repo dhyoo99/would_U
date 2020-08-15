@@ -16,6 +16,9 @@ def index(request):
     if request.method == 'POST':
         return redirect('/')
 
+def account(request):
+    return render(request, 'planet/account.html')
+
 
 def signup(request):
     if request.method == 'POST':
@@ -24,14 +27,16 @@ def signup(request):
             password = request.POST["password1"]
             planetname = request.POST["planetname"]
 
-            user = User.objects.create_user(
-                username=username, password=password)
+            user = User.objects.create_user(username=username, password=password)
             user.planet.name = planetname
             user.save()
             auth.login(request, user)
             return redirect('/app/')
-    return render(request, 'account/signup.html')
+    return render(request, 'registration/signup.html')
 
+@login_required(login_url='/app/login/login')
+def create_qna_home(request):
+    return render(request, 'planet/create_qna_home.html')
 
 @login_required(login_url='/app/login/login')
 def create_qna(request):
@@ -64,10 +69,13 @@ def create_qna(request):
             print(a)
 
         qna_pk = new_qna.pk
-        return redirect('/app/', qna_pk)  # share_qna로 redirect하게 수정 필요
+        return redirect('/app/share_qna', qna_pk)  # share_qna로 redirect하게 수정 필요
 
     return render(request, 'planet/create_qna.html', {'questions': questions})
 
+@login_required(login_url='/app/login/login')
+def solve_qna_home(request):
+    return render(request, 'planet/solve_qna_home.html')
 
 def solve_qna(request, qna_pk):
     qna_to_solve = Qna.objects.get(pk=qna_pk)
@@ -124,6 +132,8 @@ def solve_qna(request, qna_pk):
 
     return render(request, 'planet/solve_qna.html', {'qna_to_solve': qna_to_solve, 'qna_questions': qna_questions, 'planet_name': planet_name})
 
+def user_home(request):
+    return render(request, 'planet/user_home.html')
 
 def score(request, score_pk):
     score = Score.objects.get(pk=score_pk)
@@ -173,3 +183,15 @@ def solve_signup(request, qna_pk):
 
     if request.method == 'GET':
         return render(request, 'registration/solve_signup.html', {'qna_pk': qna_pk})
+        
+@login_required(login_url='/app/login/login')
+def share_qna(request):
+    return render(request, 'planet/share_qna.html')
+
+@login_required(login_url='/app/login/login')
+def result_qna(request):
+    return render(request, 'planet/result_qna.html')
+
+@login_required(login_url='/app/login/login')
+def answer_detail(request):
+    return render(request, 'planet/answer_detail.html')
