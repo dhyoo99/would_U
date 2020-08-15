@@ -6,7 +6,8 @@ from django.dispatch import receiver
 
 
 class Planet(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='planet')
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True, related_name='planet')
     name = models.CharField(max_length=100)
     #img_src = models.TextField()
 
@@ -105,7 +106,7 @@ class Score(models.Model):
     score = models.IntegerField()
 
     def __str__(self):
-        return self.user.usrname + '/' + self.qna.owner.username
+        return self.user.username + '/' + self.qna.owner.username
 
 
 # 각 행성간 거리
