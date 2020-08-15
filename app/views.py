@@ -44,6 +44,7 @@ def signup(request):
 def user_home(request):
     return render(request, 'planet/user_home.html')
 
+
 @login_required(login_url='/app/login')
 def create_qna_home(request):
     questions = Question.objects.all()
@@ -255,10 +256,11 @@ def result(request):
             i += 1
         return HttpResponse(json.dumps(result))
 
-      
+
 @login_required(login_url='/app/login')
 def share_qna(request):
     return render(request, 'planet/share_qna.html')
+
 
 @login_required(login_url='/app/login')
 def answer_detail(request):
@@ -345,3 +347,43 @@ def friend_planet(request, user_pk):
     result = result[0:3]
 
     return render(request, 'planet/friend_planet.html', {'owner_planet': owner_planet, 'result': result})
+
+
+@csrf_exempt
+def answer_detail(request, score_pk):
+    score = Score.objects.get(pk=score_pk)
+    owner = score.qna.owner
+
+    if request.method == "POST":
+        request_body = json.loads(request.body)
+        print(request_body)
+        solver_pk = request_body['solver_pk']
+        owner_pk = request_body['owner_pk']
+
+        solver = User.objects.get(pk=solver_pk)
+        owner = User.objects.get(pk=owner_pk)
+
+        qna = score.qna
+
+        qna_questions = Qna_question.objects.filter(Qna=qna)
+
+        result = {}
+        i = 1
+        for pair in qna_questions:
+            choice = Choice.objects.get(solver=solver, qna_question=pair)
+            answer = Answer.objects.get(qna_question=pair)
+            if choice.isAnswer == True:
+                isAnswer = 'true'
+            else:
+                isAnswer = 'false'
+            data = {
+                "question": pair.question.content,
+                "choice": choice.option.content,
+                "answer": answer.option.content,
+                "isAnswer": isAnswer
+            }
+            result[f'{i}'] = data
+            i += 1
+        return HttpResponse(json.dumps(result))
+
+    return render(request, 'planet/answer_detail.html', {'owner': owner, 'score': score})
