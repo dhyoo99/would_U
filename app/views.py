@@ -240,10 +240,6 @@ def share_qna(request):
     return render(request, 'planet/share_qna.html')
 
 @login_required(login_url='/app/login/login')
-def result_qna(request):
-    return render(request, 'planet/result_qna.html')
-
-@login_required(login_url='/app/login/login')
 def answer_detail(request):
     return render(request, 'planet/answer_detail.html')
 
