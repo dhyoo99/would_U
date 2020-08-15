@@ -9,4 +9,5 @@ urlpatterns = [
     path('create_qna/', views.create_qna, name='create_qna'),
     path('solve_qna/<int:qna_pk>', views.solve_qna, name='solve_qna'),
     path('score/<int:score_pk>', views.score, name='score'),
+    path('share_qna/', views.share_qna, name='share_qna'),
 ]
