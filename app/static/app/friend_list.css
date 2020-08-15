@@ -117,3 +117,27 @@ a {
   font-size: 1rem;
   line-height: 1.5rem;
 }
+
+.table_row{
+  margin-top: 40%;
+  width: 80%;
+  height: 5.8rem;
+  background-color: #ffffff;
+  color: black;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+}
+
+.table_row span{
+  font-size: 2rem;
+  font-weight: 800;
+  width: 80%;
+}
