@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+<link rel="stylesheet" type="text/css" href="{%static 'app/friend_list.css'%}">
 {% endblock css %}
 
 
 {% block content %}
+
+<a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a> 
+
 <div class="wrap">
-    <h2>Friend List</h2>
+    <h2>Friend <br> List</h2>
     <p>친구들이 내 정답을 얼마나 맞췄을까?</p>
 
     <div class="friend_select">

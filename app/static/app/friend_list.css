@@ -54,8 +54,6 @@ button.button {
     flex-direction: column;
 }
 
-a {
-    color: black;
-    background-color: white;
-    text-decoration: none;
-  }  
+h2 {
+    font-size: 3.5rem;
+}
