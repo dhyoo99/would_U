@@ -1,26 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+  <link rel="stylesheet" href="../../static/app/create_qna_home.css" />
 {% endblock css %}
+
 
 {% block content %}
 
-<a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a>
+<div class='home_icon'>
+  <a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a>
+</div>
+
 
 {% if error %}
   <p>{{error}}</p>
 {% else %}
-  <h1>
-    create <br>
-    QnA
-  </h1>
-  <h2>
-    다음 9개의 질문에 <br> 
-    자신과 가장 가까운 <br>
-    답을 골라주세요! 
-  </h2>
+<div class="total">
+  <div class="title">
+    <h1>
+      create <br>
+      QnA
+    </h1>
+    <p>
+      다음 9개의 질문에 <br> 
+      자신과 가장 가까운 <br>
+      답을 골라주세요! 
+    </p>
+  </div>
+  <div class="start_button">
+    <button class ="start"><a href="{% url 'create_qna' %}">start!</a></button> 
+  </div>
+</div>
 
-  <button class ="button"><a href="{% url 'create_qna' %}">start!</a></button> 
+ 
+
+  
 {%endif%}
 
 {% endblock content %}

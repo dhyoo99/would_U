@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+html {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  color: white;
+  margin: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  font-size: 10px;
+}
+
+body {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  background-image: url('../Group\ 13.png'); 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  
+
+}
+
+.title {
+  color: white;
+  font-size: 4.5rem;
+  width: 100%;
+  padding-top: 5vh;
+  padding-left: 5vw;
+
+}
+
+button.start {
+  width: 70vw;
+  height: 10vh;
+  background: #ffffff;
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+  border: 0px;
+  font-weight: 900;
+  font-size: 2rem;
+  font-family: "Montserrat", sans-serif;
+  
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start_button {
+  text-align: center;  
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 5rem;
+}
+
+a {
+  color: black;
+  background-color: white;
+}
+
+p {
+  line-height: 24px;
+  font-size: 1.7rem;
+  letter-spacing: 0.3rem;
+  width: 100%;
+  padding-left: 10%;
+  padding-top: 1.6rem;
+  margin:0;
+  
+}
+
+h1 {
+  /* padding-top: 10%; */
+  margin: 0 auto;
+  font-size: 3.5rem;
+  width: 100%;
+  padding-left: 10%;
+  
+}
+
+.home_icon {
+  text-align: center;
+  padding-top: 1rem;
+  font-size: 2.5rem;
+}
