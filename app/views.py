@@ -5,6 +5,9 @@ from django.shortcuts import redirect
 from .models import Planet, Qna, Question, Option, Qna_question, Answer, Choice, Score, Distance
 from django.contrib.auth.decorators import login_required
 from .distance import createDistance
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+import json
 
 
 def index(request):
@@ -131,6 +134,48 @@ def score(request, score_pk):
     print(d.distance)
     return render(request, 'planet/score.html', {'score': score})
 
+def friend_list(request, user_pk):
+    user = User.objects.get(pk=user_pk)
+    user_qna = Qna.objects.get(owner=user)
+
+    scores = Score.objects.filter(qna=user_qna)
+
+    return render(request, 'planet/friend_list.html', {'scores': scores, 'owner': user})
+
+
+# friend_list 에서 결과 가져오는 함수
+@csrf_exempt
+def result(request):
+    if request.method == "POST":
+        request_body = json.loads(request.body)
+        print(request_body)
+        friend_pk = request_body['friend_pk']
+        owner_pk = request_body['owner_pk']
+
+        friend = User.objects.get(pk=friend_pk)
+        owner = User.objects.get(pk=owner_pk)
+
+        qna = Qna.objects.get(owner=owner)
+
+        qna_questions = Qna_question.objects.filter(Qna=qna)
+        print(qna)
+        result = {}
+        i = 1
+        for pair in qna_questions:
+            choice = Choice.objects.get(solver=friend, qna_question=pair)
+            if choice.isAnswer == True:
+                isAnswer = 'true'
+            else:
+                isAnswer = 'false'
+            data = {
+                "question": pair.question.content,
+                "answer": choice.option.content,
+                "isAnswer": isAnswer
+            }
+            result[f'{i}'] = data
+            i += 1
+        return HttpResponse(json.dumps(result))
+      
 @login_required(login_url='/app/login/login')
 def share_qna(request):
     return render(request, 'planet/share_qna.html')

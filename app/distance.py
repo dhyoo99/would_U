@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from .models import Planet, Qna, Question, Option, Qna_question, Answer, Choice, Score, Distance
 
+# score 계산시 Distance 생성
+
 
 def createDistance(score_pk):
     score = Score.objects.get(pk=score_pk)
@@ -28,9 +30,8 @@ def createDistance(score_pk):
 
     return new_distance
 
+
 # 두 planet간 거리로 보여줄 값 계산
-
-
 def getDistance(planet_pk_1, planet_pk_2):
     planet_1 = Planet.objects.get(pk=planet_pk_1)
     planet_2 = Planet.objects.get(pk=planet_pk_2)
