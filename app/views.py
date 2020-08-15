@@ -26,19 +26,33 @@ def account(request):
 
 def signup(request):
     if request.method == 'POST':
-        if request.POST['password1'] == request.POST['password2']:
-            username = request.POST["username"]
-            password = request.POST["password1"]
-            planetname = request.POST["planetname"]
+        username = request.POST["username"]
+        password1 = request.POST["password1"]
+        password2 = request.POST["password2"]
+        planetname = request.POST["planetname"]
+
+        if username == "":
+            error = "아이디를 입력해주세요."
+            return render(request, 'registration/signup.html', {'error': error})
+
+        elif password1 == "" or password2 == "":
+            error = "비밀번호를 입력해주세요."
+            return render(request, 'registration/signup.html', {'error': error})
+
+        elif planetname == "":
+            error = "행성 이름을 입력해주세요."
+            return render(request, 'registration/signup.html', {'error': error})
+
+        if password1 == password2:
 
             try:
                 user = User.objects.create_user(
-                    username=username, password=password)
+                    username=username, password=password1)
 
                 if Planet.objects.filter(name=planetname).count() > 0:
                     error =  "중복된 행성 이름입니다."
                     return render(request, 'registration/signup.html', {'error': error})
-
+                    
                 else:
                     user.planet.name = planetname
                     user.save()
