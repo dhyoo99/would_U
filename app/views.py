@@ -46,16 +46,17 @@ def signup(request):
         if password1 == password2:
 
             try:
-                user = User.objects.create_user(
-                    username=username, password=password1)
-
                 if Planet.objects.filter(name=planetname).count() > 0:
                     error = "중복된 행성 이름입니다."
                     return render(request, 'registration/signup.html', {'error': error})
 
                 else:
+                    user = User.objects.create_user(
+                        username=username, password=password1)
                     user.planet.name = planetname
                     user.save()
+                    
+
 
             except:
                 error = "중복된 아이디입니다."
