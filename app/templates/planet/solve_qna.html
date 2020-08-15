@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock css %}
+
+
+{% block content %}
+{% if error %}
+<p>{{error}}</p>
+{% else %}
+<form method="post">
+    {% csrf_token %}
+    <h3>{{planet_name}}의 주인의 선택은?</h3>
+    {% for pair in qna_questions %}
+    <div class='qna_box' id='question-{{forloop.counter}}'>
+        <div class='question'>
+            <span>Q {{forloop.counter}}.</span>
+            <p>{{pair.question.content}}</p>
+        </div>
+        <div class='answer'>
+            <div class='answer_radio'>
+                {% for option in pair.question.options.all %}
+                <label>{{option.content}}
+                    <input type="radio" name="{{option.question.pk}}" value={{option.pk}}>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <button type="submit">done!</button>
+</form>
+{% endif %}
+{% endblock content %}
