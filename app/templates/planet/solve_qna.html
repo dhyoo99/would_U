@@ -1,37 +1,37 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ko">
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/solve_qna.css' %}">
+<!-- <link rel="stylesheet" type="text/css" media="(max-width:500px)" href="../static/app/account.css"> -->
 
-<head>
-    <meta charset="UTF-8">
-    <title>wouldU</title>
-</head>
+<link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 
+{% endblock css %}
 
 {% block content %}
 
-<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
-{% comment %} solve_Qna 맨 첫 페이지 {% endcomment %}
-<h1>
+<h1 id ="1">
   solve <br>
   QnA
 </h1>
-<h2>
+<h2 id ="2">
   다음 9개의 질문에 <br> 
   링크를 보내준 친구가 <br>
   선택했을 것 같은 <br>
   답을 골라주세요! 
 </h2>
+<div id="nextbox">next</div>
 
 
 {% if error %}
 <p>{{error}}</p>
 {% else %}
-<form method="post">
+<form id="qna" method="post">
     {% csrf_token %}
-    <h3>{{qna_to_solve.owner.planet.name}}의 주인의 선택은?</h3>
     {% for pair in qna_questions %}
-    <div class='qna_box' id='question-{{forloop.counter}}'>
+    <div class='qna_box' id='question_{{forloop.counter}}'>
         <div class='question'>
             <span>Q {{forloop.counter}}.</span>
             <p>{{pair.question.content}}</p>
@@ -39,17 +39,22 @@
         <div class='answer'>
             <div class='answer_radio'>
                 {% for option in pair.question.options.all %}
-                <label>{{option.content}}
+                <label onclick="gray(this)">{{option.content}}
                     <input type="radio" name="{{option.question.pk}}" value={{option.pk}}>
                 </label>
                 {% endfor %}
             </div>
         </div>
-        {% endfor %}
-        <button type="submit">done!</button>
+        <div class="next_back">
+            <div id="back_{{forloop.counter}}" class="back">back</div>
+            <div id="next_{{forloop.counter}}" class="next">next</div>
+        </div>
+    </div>
+    {% endfor %}
 </form>
 {% endif %}
-{% endblock %}
+<script src="{% static 'app/solve_qna.js' %}"></script>
 </body>
+{% endblock %}
 
 </html>

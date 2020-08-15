@@ -1,28 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+  <link rel="stylesheet" href="../../static/app/create_qna_home.css" />
 {% endblock css %}
 
+
 {% block content %}
-
-<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
-
-<h1>
-  solve <br>
-  QnA
-</h1>
-<h2>
-  다음 9개의 질문에 <br> 
-  링크를 보내준 친구가 <br>
-  선택했을 것 같은 <br>
-  답을 골라주세요! 
-</h2>
-
-
-
-
-
-
-
-
+<div class="total">
+  <div class="title">
+    <h1>
+      create <br>
+      QnA
+    </h1>
+    <p>
+      다음 9개의 질문에<br> 
+      링크를 보내준 친구가<br>
+      선택했을 것 같은<br>
+      답을 골라주세요!
+    </p>
+  </div>
+  <div class="start_button">
+    <button class ="start"><a href="{% url 'solve_qna' qna_pk %}">start!</a></button> 
+  </div>
+</div>
 {% endblock content %}

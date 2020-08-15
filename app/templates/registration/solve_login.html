@@ -1,29 +1,37 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>solvelogin</title>
-</head>
-<body>
-    <div class="input">
-        <form method="post" action="{% url 'solve_login' qna_pk %}">
-            {% csrf_token %}
-            <div class="id-pw">
-                <div>
-                    <input name="username" type="text" placeholder="아이디" spellcheck="false">
-                </div>
-                <div>
-                    <input name="password" type="password" placeholder="비밀번호">
-                </div>
-            </div>
-            <button type="submit">로그인</button>
-        </form>
-        <div>
-            <a href="{% url 'solve_signup' qna_pk %}">회원가입</a>
-        </div>
-    </div>
-    <div>
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/login.css' %}">
+<!-- <link rel="stylesheet" type="text/css" media="(max-width:500px)" href="../static/app/account.css"> -->
+
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+{% endblock css %}
+{% block content %}
+<div class="title">
+    <h1>log in </h1>
+</div>
+<div class="bottom">
+    <div class="error">
         <span>{{ error }}</span>
     </div>
-</body>
-</html>
+    <form method="post" action="{% url 'solve_login' qna_pk %}">
+        {% csrf_token %}
+        <div class="id">
+            <h2>ID</h2>
+            <input name="username" id="input" type="text" placeholder="ex. joohye" spellcheck="false">
+        </div>
+        <div class="pw">
+            <h2>P/W</h2>
+            <input name="password" id="input" type="password" placeholder="ex. 1234">
+        </div>
+        <div class="button">
+            <button type="submit" class="submit">done</button>
+        </div>
+    </form>
+
+</div>
+{% endblock content %}

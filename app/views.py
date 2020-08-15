@@ -123,8 +123,8 @@ def create_qna(request):
 
 
 @login_required(login_url='/app/login/login')
-def solve_qna_home(request):
-    return render(request, 'planet/solve_qna_home.html')
+def solve_qna_home(request, qna_pk):
+    return render(request, 'planet/solve_qna_home.html', {'qna_pk': qna_pk})
 
 
 def solve_qna(request, qna_pk):
@@ -167,7 +167,7 @@ def solve_qna(request, qna_pk):
         cur_user = request.user
 
         if not cur_user.is_authenticated:
-            return render(request, 'registration/solve_login.html', {'qna_pk': qna_pk})
+            return render(request, 'registration/solve_account.html', {'qna_pk': qna_pk})
 
             # error handling
         error = False
@@ -204,7 +204,7 @@ def solve_login(request, qna_pk):
         # 성공
         if user is not None:
             auth.login(request, user)
-            return redirect('solve_qna', qna_pk=qna_pk)
+            return redirect('solve_qna_home', qna_pk=qna_pk)
 
         # 실패
         else:
@@ -222,22 +222,49 @@ def solve_login(request, qna_pk):
 
 def solve_signup(request, qna_pk):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        planetname = request.POST['planetname']
+        username = request.POST["username"]
+        password1 = request.POST["password1"]
+        password2 = request.POST["password2"]
+        planetname = request.POST["planetname"]
 
-        user = User.objects.create_user(username=username, password=password)
-        user.planet.name = planetname
-        user.save()
+        if username == "":
+            error = "아이디를 입력해주세요."
+            return render(request, 'registration/solve_signup.html', {'error': error, 'qna_pk': qna_pk})
 
-        login_user = django_authenticate(username=username, password=password)
-        django_login(request, login_user)
-        return redirect('solve_qna', qna_pk=qna_pk)
+        elif password1 == "" or password2 == "":
+            error = "비밀번호를 입력해주세요."
+            return render(request, 'registration/solve_signup.html', {'error': error, 'qna_pk': qna_pk})
+
+        elif planetname == "":
+            error = "행성 이름을 입력해주세요."
+            return render(request, 'registration/solve_signup.html', {'error': error, 'qna_pk': qna_pk})
+
+        if password1 == password2:
+
+            try:
+                if Planet.objects.filter(name=planetname).count() > 0:
+                    error = "중복된 행성 이름입니다."
+                    return render(request, 'registration/solve_signup.html', {'error': error, 'qna_pk': qna_pk})
+
+                else:
+                    user = User.objects.create_user(
+                        username=username, password=password1)
+                    user.planet.name = planetname
+                    user.save()
+
+            except:
+                error = "중복된 아이디입니다."
+                return render(request, 'registration/solve_signup.html', {'error': error, 'qna_pk': qna_pk})
+
+            auth.login(request, user)
+            return redirect('solve_qna', qna_pk=qna_pk)
+
+        else:
+            error = "비밀번호가 일치하지 않습니다."
+            return render(request, 'registration/solve_signup.html', {'error': error, 'qna_pk': qna_pk})
 
     if request.method == 'GET':
         return render(request, 'registration/solve_signup.html', {'qna_pk': qna_pk})
-
-# solve/<int:qna_pk>/ 링크를 던져줘야 한다.
 
 
 def share_qna(request, qna_pk):

@@ -1,24 +1,61 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>solve_signup</title>
-</head>
-<body>
-    <form method="POST" action="{% url 'solve_signup' qna_pk %}">
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/signup.css' %}">
+<!-- <link rel="stylesheet" type="text/css" media="(max-width:500px)" href="../static/app/account.css"> -->
+
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+{% endblock css %}
+{% block content %}
+<div class="title">
+    <h1>sign up</h1>
+</div>
+
+<div class="bottom">
+    <div id="error">{{error}}</div>
+    <form method="post" action="{% url 'solve_signup' qna_pk %}">
         {% csrf_token %}
-        <div>
-            <div>
-                <input name="username" type="text" placeholder="아이디" spellcheck="false">
+        <div id="first_signup" class="signup1">
+            <div class="id">
+                <h2>ID:</h2>
+                <input id="username"" name="username" placeholder="ex. joohye" class="input" type="text" value="" spellcheck="false">
             </div>
-            <div>
-                <input name="password" type="password" placeholder="비밀번호">
+            <div class="id">
+                <h2>P/W:</h2>
+                <input id="password" name="password1" placeholder="ex. 1234" class="input" type="password" value="">
             </div>
-            <div>
-                <input name="planetname" type="text" placeholder="행성이름">
+            <div class="pw">
+                <h2>P/W 확인:</h2>
+                <input name="password2" class="input" placeholder="ex. 1234" type="password" value="">
+            </div>
+            <div id="next">
+                next
             </div>
         </div>
-        <button type="submit">회원가입</button>
+
+        <div id="second_signup" class="signup2">
+            <div class="id2">
+                <h2>planet name : </h2>
+                <p> 당신만의 고유한 <br>행성이름을 지어주세요</p>
+                <input id="planetname" name="planetname" placeholder="ex. 헬리 행성 / 시리우스 " class="input" type="text" value="" spellcheck="false">
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="button">
+                <div id="back">back</div>
+                <button type="submit" class="submit">done</button>
+            </div>
+        </div>
+
     </form>
-</body>
-</html>
+
+</div>
+<script src="{% static 'app/signup.js' %}"></script>
+
+{% endblock content %}
