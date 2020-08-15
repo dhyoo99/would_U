@@ -59,6 +59,11 @@
             answerBox.textContent = `→ 친구의 답: ${data[i].answer}    ( ${isAnswer} )`
 
             qnaBox.appendChild(qnaRow)
+
+            if (isAnswer === 'X') {
+            questionBox.style.color = 'red';
+            answerBox.style.color = 'red';
+            }
         }
         setLink()
     }
