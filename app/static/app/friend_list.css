@@ -20,40 +20,99 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url( "../Group\ 10.png" ); 
+    background-image: url( "../Group\ 14.png" ); 
 }
 
-.title {
-    color: white;
-    padding-left: 10vw;
-    padding-top: 5vh;
+h2 {
+    font-size: 3.5rem;
+    padding-left: 2rem;
+}
+
+p {
+    padding-left: 2rem;
     font-size: 1.5rem;
-  }
-  
-.bottom {
-    color: white;
+    line-height: 2.5rem;
+    font-weight: bold;
 }
 
-button.button {
-    width: 70vw;
-    height: 10vh;
+.friend_select {
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+select#friend {
+    height: 100%;
+    width: 80%;
+    color: black;
+}
+
+.friend_page {
+    width: 80%;
     background: #ffffff;
     box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25);
     border-radius: 40px;
     border: 0px;
     font-weight: 900;
-    font-size: 4vw;
-}
-
-.buttons {
-    padding-left: 15vw;
-    padding-right: 15vw;
-    padding-top: 20vh;
-    padding-bottom: 5%;
+    font-size: 5vw;
+    color: black;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-h2 {
-    font-size: 3.5rem;
+.qna {
+    margin: 1rem;
+    background: #ffffff;
+    height: 20rem;
+    width: 80%;
+    font-weight: 900;
+    font-size: 5vw;
+    color: black;
+}
+
+.wrap {
+    padding-bottom: 2rem;
+    height: 100%;
+}
+
+.friend_score{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    color: black;
+    background-color: white;
+    text-decoration: none;
+}
+
+.friend_page_wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem; 
+}
+
+.friend_page {
+    margin: 1rem;
+    background: #ffffff;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 80%;
+    font-weight: 900;
+    font-size: 5vw;
+    color: black;
+}
+
+/* .qnaRow {
+    line-height: 2rem;
+} */
+
+.qnaRow p {
+    font-size: 1rem;
+    line-height: 1.5rem;
 }

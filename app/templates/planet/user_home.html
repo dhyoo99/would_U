@@ -13,7 +13,7 @@
 <div class="bottom">
     <div class="buttons">
         <button class="button">
-            <a href="{% url 'create_qna_home' request.user.pk %}">
+            <a href="{% url 'create_qna_home'%}">
                 create QnA <br> 내 문제 만들기 
             </a>
         </button>
@@ -25,7 +25,7 @@
         </button>
         <br>
         <button class="button">
-            <a href="//rank/{{user.id}}">
+            <a href="/app/rank/{{user.id}}">
                 rank <br> 순위 보기
             </a>
         </button>
