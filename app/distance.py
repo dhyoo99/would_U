@@ -12,20 +12,41 @@ def createDistance(score_pk):
     this_planet = Planet.objects.get(user=solver)  # 문제 푼사람
     that_planet = Planet.objects.get(user=qna_owner)  # 문제 낸 사람
 
-    distance = 1000000
-
     qna_questions = Qna_question.objects.filter(Qna=score.qna)
+    weight = 0
+
     for pair in qna_questions:
         choice = Choice.objects.get(qna_question=pair, solver=solver)
 
         if choice.isAnswer:
-            distance -= pair.question.weight * 55555
-            # 랜덤한 숫자 가중치에 곱해서 거리 계산
-            # 거리계산 logic 수정 필요할듯..?
+            weight += pair.question.weight
+
+    option = {
+        0: 2147483647,
+        1: 1894798124,
+        2: 894987833,
+        3: 624192878,
+        4: 489791256,
+        5: 123894567,
+        6: 73209849,
+        7: 45289372,
+        8: 5238972,
+        9: 3624355,
+        10: 61878,
+        11: 29488,
+        12: 3987,
+        13: 4874,
+        14: 909,
+        15: 122,
+        16: 77,
+        17: 11,
+        18: 7
+    }
+
     new_distance = Distance.objects.create(
         this=this_planet,
         that=that_planet,
-        distance=distance
+        distance=option[weight]
     )
 
     return new_distance
@@ -52,5 +73,5 @@ def getDistance(planet_pk_1, planet_pk_2):
             result = distance_2to1[0].distance
             return result
         else:
-            default = 1000000
+            default = 2147483647
             return default

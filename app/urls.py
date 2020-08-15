@@ -30,6 +30,9 @@ urlpatterns = [
     path('account/', views.account, name='account'),
     path('user_home/<int:user_pk>/', views.user_home, name='user_home'),
     path('share_qna/', views.share_qna, name='share_qna'),
+    path('rank/<int:user_pk>', views.rank, name='rank'),
+    path('friend_planet/<int:user_pk>',
+         views.friend_planet, name='friend_planet'),
 
     # friend_list의 결과가져옴
     path('result', views.result, name='result'),

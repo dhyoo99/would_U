@@ -4,7 +4,7 @@ from django.contrib import auth
 from django.shortcuts import redirect
 from .models import Planet, Qna, Question, Option, Qna_question, Answer, Choice, Score, Distance
 from django.contrib.auth.decorators import login_required
-from .distance import createDistance
+from .distance import createDistance, getDistance
 from django.contrib.auth import login as django_login
 from django.contrib.auth import authenticate as django_authenticate
 from django.views.decorators.csrf import csrf_exempt
@@ -102,59 +102,57 @@ def solve_qna_home(request):
     return render(request, 'planet/solve_qna_home.html')
 
 
-@login_required(login_url='/app/login/login')
 def solve_qna(request, qna_pk):
     qna_to_solve = Qna.objects.get(pk=qna_pk)
     planet_name = Planet.objects.get(user=qna_to_solve.owner).name
     qna_questions = Qna_question.objects.filter(Qna=qna_to_solve)
 
-    # error handling
-    error = False
-    try:
-        if request.user.pk == qna_to_solve.owner.pk:
-            error = '자신의 문제는 풀수 없어요'
-        elif Score.objects.filter(qna=qna_to_solve, user=request.user).count() > 0:
-            error = '이미 푼 문제입니다'
-        if error:
-            return render(request, 'planet/solve_qna.html', {'error': error})
+    if request.method == 'POST':
+        choices = []
+        score_cnt = 0
+        for pair in qna_questions:
+            choice = Option.objects.get(
+                pk=request.POST[f'{pair.question.pk}'])
+            answer = Answer.objects.get(qna_question=pair).option
 
-    except:
-        if request.method == 'POST':
-            choices = []
-            score_cnt = 0
-            for pair in qna_questions:
-                choice = Option.objects.get(
-                    pk=request.POST[f'{pair.question.pk}'])
-                answer = Answer.objects.get(qna_question=pair).option
+            if choice == answer:
+                isAnswer = True
+                score_cnt += 1
+            else:
+                isAnswer = False
 
-                if choice == answer:
-                    isAnswer = True
-                    score_cnt += 1
-                else:
-                    isAnswer = False
-
-                c = Choice.objects.create(
-                    qna_question=pair,
-                    solver=request.user,
-                    option=choice,
-                    isAnswer=isAnswer
-                )
-                choices.append(c)
-
-            # create Score
-            score = Score.objects.create(
-                user=request.user,
-                qna=qna_to_solve,
-                score=score_cnt
+            c = Choice.objects.create(
+                qna_question=pair,
+                solver=request.user,
+                option=choice,
+                isAnswer=isAnswer
             )
+            choices.append(c)
 
-            return redirect('score', score.pk)
+        # create Score
+        score = Score.objects.create(
+            user=request.user,
+            qna=qna_to_solve,
+            score=score_cnt
+        )
+
+        return redirect('score', score.pk)
 
     if request.method == 'GET':
         cur_user = request.user
 
         if not cur_user.is_authenticated:
             return render(request, 'registration/solve_login.html', {'qna_pk': qna_pk})
+
+            # error handling
+        error = False
+
+        if request.user.pk == qna_to_solve.owner.pk:
+            error = '자신의 문제는 풀수 없어요'
+        elif Score.objects.filter(qna=qna_to_solve, user=request.user).count() > 0:
+            error = '이미 푼 문제입니다'
+        if error:
+            return render(request, 'planet/solve_qna.html', {'error': error})
 
     return render(request, 'planet/solve_qna.html', {'qna_to_solve': qna_to_solve, 'qna_questions': qna_questions, 'planet_name': planet_name})
 
@@ -241,6 +239,7 @@ def result(request):
         qna_questions = Qna_question.objects.filter(Qna=qna)
         print(qna)
         result = {}
+
         i = 1
         for pair in qna_questions:
             choice = Choice.objects.get(solver=friend, qna_question=pair)
@@ -302,3 +301,54 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return render(request, 'planet/account.html')
+
+
+def rank(request, user_pk):
+    owner = User.objects.get(pk=user_pk)
+    qna = Qna.objects.get(owner=owner)
+
+    owner_planet = Planet.objects.get(user=owner)
+
+    result = []
+    scores = Score.objects.filter(qna=qna)
+    for score in scores:
+        solver_planet = Planet.objects.get(user=score.user)
+        d = getDistance(owner_planet, solver_planet)
+        data = {
+            "name": score.user.planet.name,
+            "score": score.score,
+            "distance": d
+        }
+
+        result.append(data)
+    print(result)
+
+    result = sorted(result, key=lambda data: (data['distance']))
+
+    return render(request, 'planet/rank.html', {'result': result})
+
+
+def friend_planet(request, user_pk):
+    owner = User.objects.get(pk=user_pk)
+    qna = Qna.objects.get(owner=owner)
+
+    owner_planet = Planet.objects.get(user=owner)
+
+    result = []
+    scores = Score.objects.filter(qna=qna)
+    for score in scores:
+        solver_planet = Planet.objects.get(user=score.user)
+        d = getDistance(owner_planet, solver_planet)
+        data = {
+            "name": score.user.planet.name,
+            "score": score.score,
+            "distance": d
+        }
+
+        result.append(data)
+    print(result)
+
+    result = sorted(result, key=lambda data: (data['distance']))
+    result = result[0:3]
+
+    return render(request, 'planet/friend_planet.html', {'owner_planet': owner_planet, 'result': result})
