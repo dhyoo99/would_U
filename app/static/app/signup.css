@@ -34,7 +34,7 @@ body {
 .bottom {
   color: white;
   padding-left: 10vw;
-  padding-top: 10vh;
+  padding-top: 7vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -50,10 +50,20 @@ h1 {
   font-size: 3.5rem;
 }
 
-button.submit {
-  width: 70vw;
+.button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.68vh;
+}
+
+button.submit, #next, #back {
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35vw;
   height: 8vh;
-  background: #ffffff;
+  background-color: #ffffff;
   box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25);
   border-radius: 40px;
   border: 0px;
@@ -61,8 +71,16 @@ button.submit {
   font-size: 5vw;
 }
 
-.button {
-  padding-left: 5vw;
+.submit {
+  margin-right: 10vw;
+}
+
+#next {
+  margin-left: 45vw;
+}
+
+#back {
+  margin-left: 0vw !important;
 }
 
 .account {
@@ -84,7 +102,7 @@ a {
   text-decoration: none;
 }
 
-#input {
+.input {
   border: none;
   border-bottom: 4px solid white;
   width: 80vw;
@@ -102,14 +120,18 @@ h2 {
   margin-top: 5vh;
 }
 
-.error {
-  padding-bottom: 2vh;
-  color: rgb(209, 66, 66);
+#error {
+  width: 80vw;
+  height: 2.72vh;
+  text-align: center;
   font-size: 1.5rem;
-  height: 4vh;
+  color: red;
 }
 
 .id2 {
   margin-bottom: 25vh;
-  margin-top: 5vh;
+}
+
+.signup2 {
+  display: none;
 }
