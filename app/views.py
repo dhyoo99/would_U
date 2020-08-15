@@ -122,7 +122,7 @@ def create_qna(request):
 
         qna_pk = new_qna.pk
         # share_qna로 redirect하게 수정 필요
-        return redirect('/app/share_qna', qna_pk)
+        return redirect('/app/share_qna/<int:qna_pk>/', qna_pk)
 
     return render(request, 'planet/create_qna.html', {'questions': questions})
 
