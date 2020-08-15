@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock css %}
+
+
+{% block content %}
+<div class="wrap">
+    <h2>Rank</h2>
+    <p>누가 가장 나와 가까울까?</p>
+
+    <table class="rankTable">
+        <tr>
+            <th>순위</th>
+            <th>이름</th>
+            <th>정답수</th>
+            <th>나와의 거리</th>
+        </tr>
+        {% for data in result%}
+        <tr>
+            <th>{{forloop.counter}}</th>
+            <th>{{data.name}}</th>
+            <th>{{data.score}} / 9 </th>
+            <th>{{data.distance}}</th>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

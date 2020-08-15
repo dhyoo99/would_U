@@ -1,18 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{%static 'app/user_home.css'%}">
+{% endblock css %}
+
+{% block content %}
 <div class="title">
-    <h1>This is the planet, <br> {{request.user.planet.name}}. </h1>
+    <h1>This is <br> the planet, <br> {{request.user.planet.name}}. </h1>
 </div>
 
 <div class="bottom">
-    <button class="button"><a href="{% url 'create_qna_home'%}">create QnA</a></button>
-    <br>
-    <button class="button">friend list</button>
-    <br>
-    <button class="button">rank</button>
-    <br>
-    <a href="{% url 'logout' %}">로그아웃</a>
+    <div class="buttons">
+        <button class="button">
+            <a href="{% url 'create_qna_home'%}">
+                create QnA <br> 내 문제 만들기 
+            </a>
+        </button>
+        <br>
+        <button class="button">
+            friend list <br> 친구 행성 목록
+        </button>
+        <br>
+        <button class="button">
+            rank <br> 순위 보기
+        </button>
+        <br>
+    </div>
+</div>
 
 {% endblock content %}

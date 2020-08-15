@@ -4,4 +4,6 @@
 i.fas.fa-home{
     background-color: black;
     color:white;
+    position: absolute;
+    right: 1rem;
 } 

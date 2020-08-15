@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock css %}
+
+
+{% block content %}
+<div class="wrap">
+    <h2>Friend's planet: {{owner_planet.name}}</h2>
+    <p>친구와 가까운 행성들</p>
+
+    <table class="rankTable">
+        <tr>
+            <th>순위</th>
+            <th>이름</th>
+            <th>정답수</th>
+            <th>거리</th>
+        </tr>
+        {% for data in result%}
+        <tr>
+            <th>{{forloop.counter}}</th>
+            <th>{{data.name}}</th>
+            <th>{{data.score}} / 9 </th>
+            <th>{{data.distance}}</th>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

@@ -5,7 +5,7 @@
 
 
 {% block content %}
-<div class="friend_list">
+<div class="wrap">
     <h2>Friend List</h2>
     <p>친구들이 내 정답을 얼마나 맞췄을까?</p>
 
@@ -19,12 +19,18 @@
     <div class="qna" id="qna-js" style="overflow: scroll; width: 300px; height: 500px;">
 
     </div>
+    <a href="" id="friendPlanet-js"></a>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 <script>
     const friendSelect = document.querySelector('#friend')
     const qnaBox = document.querySelector('#qna-js')
+    const setLink = () => {
+        const friendPlanetLink = document.querySelector('#friendPlanet-js')
+        friendPlanetLink.textContent = `${friendSelect.options[friendSelect.selectedIndex].text} 행성으로 가기`
+        friendPlanetLink.href = `/app/friend_planet/${friendSelect.value}`
+    }
 
     const showResult = function (response) {
         qnaBox.querySelectorAll('*').forEach(n => n.remove())
@@ -37,7 +43,7 @@
             const questionBox = document.createElement('p')
             qnaRow.appendChild(questionBox)
 
-            questionBox.textContent = `Q. ${i}  ${data[i].question}`
+            questionBox.textContent = `Q${i}.  ${data[i].question}`
 
             const answerBox = document.createElement('p')
             qnaRow.appendChild(answerBox)
@@ -47,6 +53,7 @@
 
             qnaBox.appendChild(qnaRow)
         }
+        setLink()
     }
     const getResult = () => {
         console.log(friendSelect.value)
