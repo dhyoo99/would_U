@@ -48,8 +48,8 @@
         description:"누가 나와 가장 가까울까?", 
         imageUrl:"https://ko.forallcreators.com/wp-content/uploads/spica1.png", 
         link: {
-          mobileWebUrl:"https://wouldu.herokuapp.com/solve_qna_home/", 
-          webUrl:"https://wouldu.herokuapp.com/solve_qna_home/" 
+          mobileWebUrl:"https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/", 
+          webUrl:"https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/" 
         }
       }, 
       social: {
@@ -61,8 +61,8 @@
         {
           title:"우주(WouldU)로 가기", 
           link: {
-            mobileWebUrl:"https://wouldu.herokuapp.com/solve_qna_home/", 
-            webUrl:"https://wouldu.herokuapp.com/solve_qna_home/" 
+            mobileWebUrl:"https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/", 
+            webUrl:"https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/" 
           }
         }
       ]
@@ -70,7 +70,7 @@
   }
 
   function shareFacebook() {
-    var url = "https://mighty-dawn-50726.herokuapp.com/";
+    var url = "https://wouldu.herokuapp.com/solve_qna/<int:qna_pk>/";
     var encodeURL = encodeURIComponent(url);
     location.href="https://www.facebook.com/sharer/sharer.php?u=" + encodeURL;
   }
