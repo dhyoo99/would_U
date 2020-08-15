@@ -17,7 +17,6 @@ def index(request):
 def account(request):
     return render(request, 'planet/account.html')
 
-
 def signup(request):
     if request.method == 'POST':
         if request.POST['password1'] == request.POST['password2']:
@@ -31,6 +30,9 @@ def signup(request):
             auth.login(request, user)
             return redirect('/app/')
     return render(request, 'registration/signup.html')
+
+def user_home(request):
+    return render(request, 'planet/user_home.html')
 
 @login_required(login_url='/app/login/login')
 def create_qna_home(request):
@@ -121,9 +123,6 @@ def solve_qna(request, qna_pk):
 
         return redirect('score', score.pk)
     return render(request, 'planet/solve_qna.html', {'qna_to_solve': qna_to_solve, 'qna_questions': qna_questions, 'planet_name': planet_name})
-
-def user_home(request):
-    return render(request, 'planet/user_home.html')
 
 def score(request, score_pk):
     score = Score.objects.get(pk=score_pk)
