@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock css %}
+
+{% block content %}
   <h1>
     Great job! <br>
     Share with <br>
@@ -25,7 +23,7 @@
   <input type="button" onClick="shareKakaotalk();" value="카카오톡 공유하기"/>
   <input type="button" onclick="shareFacebook();" value="페이스북 공유하기"/>
 
-  <!-- script 코드 -->
+<!-- script 코드 -->
 <script type="text/javascript">
   const link = document.getElementById("link")
 
@@ -47,8 +45,8 @@
         description:"누가 나와 가장 가까울까?", 
         imageUrl:"https://ko.forallcreators.com/wp-content/uploads/spica1.png", 
         link: {
-          mobileWebUrl:"https://mighty-dawn-50726.herokuapp.com/", 
-          webUrl:"https://mighty-dawn-50726.herokuapp.com/" 
+          mobileWebUrl:"https://wouldu.herokuapp.com/solve_qna_home/", 
+          webUrl:"https://wouldu.herokuapp.com/solve_qna_home/" 
         }
       }, 
       social: {
@@ -60,8 +58,8 @@
         {
           title:"우주(WouldU)로 가기", 
           link: {
-            mobileWebUrl:"https://naver.com/", 
-            webUrl:"https://mighty-dawn-50726.herokuapp.com/" 
+            mobileWebUrl:"https://wouldu.herokuapp.com/solve_qna_home/", 
+            webUrl:"https://wouldu.herokuapp.com/solve_qna_home/" 
           }
         }
       ]
@@ -75,5 +73,4 @@
   }
 </script>
 
-</body>
-</html>
+{% endblock content %}
