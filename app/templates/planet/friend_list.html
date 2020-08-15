@@ -12,6 +12,9 @@
 <div class="wrap">
     <h2>Friend <br> List</h2>
     <p>친구들이 내 정답을 <br> 얼마나 맞췄을까?</p>
+
+    {% if result %}
+
     <div class="friend_select">
         <select name="friend" id="friend" onchange="getResult()">
             {% for score in scores %}
@@ -27,6 +30,13 @@
                 <a href="" id="friendPlanet-js"></a>
         </div>
     </div>
+
+    {% else %}
+        <div class="table_row"">
+            <span>아직 문제를 푼 친구가 없어요!</span>
+        </div>
+    {% endif %}
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
