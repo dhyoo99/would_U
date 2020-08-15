@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+  <h1>
+    create <br>
+    QnA
+  </h1>
+  <h2>
+    다음 9개의 질문에 <br> 
+    자신과 가장 가까운 <br>
+    답을 골라주세요! 
+  </h2>
+
+  <a href="{% url 'create_qna' %}">start!</a> 
+
+  {% endblock content %}
