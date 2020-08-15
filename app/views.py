@@ -21,6 +21,8 @@ def index(request):
 
 
 def account(request):
+    if request.user.is_authenticated:
+        return redirect('user_home')
     return render(request, 'planet/account.html')
 
 

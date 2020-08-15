@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
+<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a>
 
 <div class="wrap">
     <h2>Friend <br> List</h2>
@@ -25,16 +25,16 @@
     <div class="friend_score">
         <div class="qna" id="qna-js" style="overflow: scroll;"></div>
     </div>
-    <div class = "friend_page_wrap">
-        <div class = "friend_page">
-                <a href="" id="friendPlanet-js"></a>
+    <div class="friend_page_wrap">
+        <div class="friend_page">
+            <a href="" id="friendPlanet-js"></a>
         </div>
     </div>
 
     {% else %}
-        <div class="table_row"">
-            <span>아직 문제를 푼 친구가 없어요!</span>
-        </div>
+    <div class="table_row"">
+            <span style=" font-size: 14px;">아직 문제를 푼 친구가 없어요!</span>
+    </div>
     {% endif %}
 
 </div>
@@ -71,8 +71,8 @@
             qnaBox.appendChild(qnaRow)
 
             if (isAnswer === 'X') {
-            questionBox.style.color = 'red';
-            answerBox.style.color = 'red';
+                questionBox.style.color = 'red';
+                answerBox.style.color = 'red';
             }
         }
         setLink()
