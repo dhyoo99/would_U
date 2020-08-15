@@ -24,9 +24,8 @@ urlpatterns = [
     path('solve_qna/<int:qna_pk>', views.solve_qna, name='solve_qna'),
     path('score/<int:score_pk>', views.score, name='score'),
     path('friend_list/<int:user_pk>', views.friend_list, name='friend_list'),
-    path('result_qna/', views.result_qna, name='result_qna'),
-    path('answer_detail/', views.answer_detail, name='answer_detail'),
 
+    path('answer_detail/', views.answer_detail, name='answer_detail'),  
     path('account/', views.account, name='account'),
     path('user_home/<int:user_pk>/', views.user_home, name='user_home'),
     path('share_qna/', views.share_qna, name='share_qna'),

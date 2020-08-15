@@ -44,8 +44,7 @@ def signup(request):
 def user_home(request):
     return render(request, 'planet/user_home.html')
 
-
-@login_required(login_url='/app/login/login')
+@login_required(login_url='/app/login')
 def create_qna_home(request):
     questions = Question.objects.all()
 
@@ -60,7 +59,7 @@ def create_qna_home(request):
     return render(request, 'planet/create_qna_home.html')
 
 
-@login_required(login_url='/app/login/login')
+@login_required(login_url='/app/login')
 def create_qna(request):
     questions = Question.objects.all()
 
@@ -256,18 +255,12 @@ def result(request):
             i += 1
         return HttpResponse(json.dumps(result))
 
-
-@login_required(login_url='/app/login/login')
+      
+@login_required(login_url='/app/login')
 def share_qna(request):
     return render(request, 'planet/share_qna.html')
 
-
-@login_required(login_url='/app/login/login')
-def result_qna(request):
-    return render(request, 'planet/result_qna.html')
-
-
-@login_required(login_url='/app/login/login')
+@login_required(login_url='/app/login')
 def answer_detail(request):
     return render(request, 'planet/answer_detail.html')
 

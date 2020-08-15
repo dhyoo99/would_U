@@ -33,6 +33,7 @@ body {
 
 .bottom {
   color: white;
+  padding-left: 10vw;
 }
 
 p {
@@ -67,11 +68,19 @@ button.signup {
 }
 
 /* button.login {
-   margin-top: 40vh; 
-} */
+     margin-top: 40vh; 
+  } */
 
 a {
   color: black;
   background-color: white;
   text-decoration: none;
+}
+
+#input {
+  border: none;
+  border-bottom: 4px solid white;
+  width: 80vw;
+  font-size: 16px;
+  background: transparent;
 }
