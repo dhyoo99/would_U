@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <title>wouldU</title>
@@ -11,12 +12,25 @@
 
 <a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a> 
 
+{% comment %} solve_Qna 맨 첫 페이지 {% endcomment %}
+<h1>
+  solve <br>
+  QnA
+</h1>
+<h2>
+  다음 9개의 질문에 <br> 
+  링크를 보내준 친구가 <br>
+  선택했을 것 같은 <br>
+  답을 골라주세요! 
+</h2>
+
+
 {% if error %}
 <p>{{error}}</p>
 {% else %}
 <form method="post">
     {% csrf_token %}
-    <h3>{{request.user.planet.name}}의 주인의 선택은?</h3>
+    <h3>{{qna_to_solve.owner.planet.name}}의 주인의 선택은?</h3>
     {% for pair in qna_questions %}
     <div class='qna_box' id='question-{{forloop.counter}}'>
         <div class='question'>
@@ -34,8 +48,9 @@
         </div>
         {% endfor %}
         <button type="submit">done!</button>
-    </form>
+</form>
 {% endif %}
+{% endblock %}
 </body>
 
 </html>
