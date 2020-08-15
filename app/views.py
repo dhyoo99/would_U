@@ -5,14 +5,11 @@ from django.shortcuts import redirect
 from .models import Planet, Qna, Question, Option, Qna_question, Answer, Choice, Score, Distance
 from django.contrib.auth.decorators import login_required
 from .distance import createDistance
-<<<<<<< HEAD
 from django.contrib.auth import login as django_login
 from django.contrib.auth import authenticate as django_authenticate
-=======
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 import json
->>>>>>> be9dbbf25fe00f84e4b9dd0e5b5948bf288c8bc5
 
 
 def index(request):
@@ -36,12 +33,8 @@ def signup(request):
             user.planet.name = planetname
             user.save()
             auth.login(request, user)
-<<<<<<< HEAD
             return redirect('user_home')
 
-=======
-            return redirect('/app/user_home/', {"user":user})
->>>>>>> be9dbbf25fe00f84e4b9dd0e5b5948bf288c8bc5
     return render(request, 'registration/signup.html')
 
 def user_home(request):
@@ -254,8 +247,6 @@ def result_qna(request):
 def answer_detail(request):
     return render(request, 'planet/answer_detail.html')
 
-def rank(request, user_pk):
-    return render(request, 'planet/rank.html')
 
 def login(request):
     if request.method == 'POST':
@@ -284,4 +275,4 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return render(request, 'account.html')
+    return render(request, 'planet/account.html')
