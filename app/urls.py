@@ -5,8 +5,9 @@ from app import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('signup/', views.signup, name='signup'),
-
     path('create_qna/', views.create_qna, name='create_qna'),
-    path('solve_qna/<int:qna_pk>', views.solve_qna, name='solve_qna'),
-    path('score/<int:score_pk>', views.score, name='score'),
+    path('solve_qna/<int:qna_pk>/', views.solve_qna, name='solve_qna'),
+    path('solve_qna/<int:qna_pk>/solve_login/', views.solve_login, name='solve_login'),
+    path('solve_qna/<int:qna_pk>/solve_signup/', views.solve_signup, name='solve_signup'),
+    path('score/<int:score_pk>/', views.score, name='score'),
 ]
