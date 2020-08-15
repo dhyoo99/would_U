@@ -84,6 +84,10 @@ select#friend {
   align-items: center;
 }
 
+.friend_score p {
+  padding-left: 3vw;
+}
+
 a {
   color: black;
   background-color: white;
