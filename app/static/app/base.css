@@ -1,8 +1,10 @@
 @charset "utf-8";
 
 /* 홈버튼입니다. */
-i.fas.fa-home {
-  color: white;
-  position: absolute;
-  right: 1rem;
-}
+.home{
+    color:white;
+    position: absolute;
+    right: 4rem;
+    top: 4rem;
+    font-size: 3rem;
+} 

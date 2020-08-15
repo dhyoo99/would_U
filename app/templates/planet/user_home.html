@@ -19,13 +19,16 @@
         </button>
         <br>
         <button class="button">
-            <a href="{% url 'friend_list'%}"></a>
-            friend list <br> 친구 행성 목록
+
+            <a href="/app/friend_list/{{user.id}}">
+                friend list <br> 친구 행성 목록
+            </a>
         </button>
         <br>
         <button class="button">
-            <a href="{% url 'create_qna_home'%}"></a>
-            rank <br> 순위 보기
+            <a href="/app/rank/{{user.id}}">
+                rank <br> 순위 보기
+            </a>
         </button>
         <br>
     </div>
