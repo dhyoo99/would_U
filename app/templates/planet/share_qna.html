@@ -6,27 +6,22 @@
 
 {% block content %}
 
-<<<<<<< HEAD <a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a>
-  =======
-  <a href="{% url 'user_home'%}"><img class="home" src="../../static/image 16.png"></a>
+<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a>
+<div class="total">
+  <div class="title">
+    <h1>
+      Great job! <br>
+      Share with <br>
+      friends :)
+    </h1>
+    <p>
+      친구들에게 <br>
+      질문을 공유해보세요! <br>
+      과연 누가 가장 많이 <br>
+      내 정답을 맞출 수 있을까요?
+    </p>
 
-  >>>>>>> b87184dd0613050552af75a361190c223e16cb94
-
-  <div class="total">
-    <div class="title">
-      <h1>
-        Great job! <br>
-        Share with <br>
-        friends :)
-      </h1>
-      <p>
-        친구들에게 <br>
-        질문을 공유해보세요! <br>
-        과연 누가 가장 많이 <br>
-        내 정답을 맞출 수 있을까요?
-      </p>
-
-    </div>
+  </div>
     <div class="copylink">
       <input id="link" value="https://wouldu.herokuapp.com/solve_qna/{{qna_pk}}" />
     </div>
