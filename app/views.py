@@ -123,12 +123,6 @@ def create_qna(request):
 
     return render(request, 'planet/create_qna.html', {'questions': questions})
 
-
-@login_required(login_url='/app/login/login')
-def solve_qna_home(request, qna_pk):
-    return render(request, 'planet/solve_qna_home.html', {'qna_pk': qna_pk})
-
-
 def solve_qna(request, qna_pk):
     qna_to_solve = Qna.objects.get(pk=qna_pk)
     planet_name = Planet.objects.get(user=qna_to_solve.owner).name
@@ -206,7 +200,7 @@ def solve_login(request, qna_pk):
         # 성공
         if user is not None:
             auth.login(request, user)
-            return redirect('solve_qna_home', qna_pk=qna_pk)
+            return redirect('solve_qna', qna_pk=qna_pk)
 
         # 실패
         else:
