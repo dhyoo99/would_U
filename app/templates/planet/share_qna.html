@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>
+    Great job! <br>
+    Share with <br>
+    friends :)
+  </h1>
+  <h2>
+    친구들에게 <br>
+    질문을 공유해보세요! <br>
+    과연 누가 가장 많이 <br>
+    내 정답을 맞출 수 있을까요?
+  </h2>
+
+  <input id="link" value="wouldU" />
+  <button onclick="copyLink()">클립보드로 복사</button>
+
+  <!-- sns 공유하기 -->
+  <input type="button" onClick="shareKakaotalk();" value="카카오톡 공유하기"/>
+  <input type="button" onclick="shareFacebook();" value="페이스북 공유하기"/>
+
+  <!-- script 코드 -->
+<script type="text/javascript">
+  const link = document.getElementById("link")
+
+  function copyLink() {
+    link.select();
+    document.execCommand("Copy");
+  }
+
+</script>
+
+<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
+  function shareKakaotalk() {
+    Kakao.init("938593826d5c00ae4a36b31f67f2717e");    
+    Kakao.Link.sendDefault({
+      objectType:"feed", 
+      content: {
+        title:"나만의 우주 만들기: WouldU", 
+        description:"누가 나와 가장 가까울까?", 
+        imageUrl:"https://ko.forallcreators.com/wp-content/uploads/spica1.png", 
+        link: {
+          mobileWebUrl:"https://mighty-dawn-50726.herokuapp.com/", 
+          webUrl:"https://mighty-dawn-50726.herokuapp.com/" 
+        }
+      }, 
+      social: {
+        likeCount:325, 
+        commentCount:64, 
+        sharedCount:542     
+      }, 
+      buttons: [
+        {
+          title:"우주(WouldU)로 가기", 
+          link: {
+            mobileWebUrl:"https://naver.com/", 
+            webUrl:"https://mighty-dawn-50726.herokuapp.com/" 
+          }
+        }
+      ]
+    });
+  }
+
+  function shareFacebook() {
+    var url = "https://mighty-dawn-50726.herokuapp.com/";
+    var encodeURL = encodeURIComponent(url);
+    location.href="https://www.facebook.com/sharer/sharer.php?u=" + encodeURL;
+  }
+</script>
+
+</body>
+</html>
