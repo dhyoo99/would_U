@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/user_home.css' %}">
+{% endblock css %}
+
+{% block content %}
 <div class="title">
     <h1>This is the planet, <br> {{request.user.planet.name}}. </h1>
 </div>
