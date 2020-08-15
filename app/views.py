@@ -26,23 +26,54 @@ def account(request):
 
 def signup(request):
     if request.method == 'POST':
-        if request.POST['password1'] == request.POST['password2']:
-            username = request.POST["username"]
-            password = request.POST["password1"]
-            planetname = request.POST["planetname"]
+        username = request.POST["username"]
+        password1 = request.POST["password1"]
+        password2 = request.POST["password2"]
+        planetname = request.POST["planetname"]
 
-            user = User.objects.create_user(
-                username=username, password=password)
-            user.planet.name = planetname
-            user.save()
+        if username == "":
+            error = "아이디를 입력해주세요."
+            return render(request, 'registration/signup.html', {'error': error})
+
+        elif password1 == "" or password2 == "":
+            error = "비밀번호를 입력해주세요."
+            return render(request, 'registration/signup.html', {'error': error})
+
+        elif planetname == "":
+            error = "행성 이름을 입력해주세요."
+            return render(request, 'registration/signup.html', {'error': error})
+
+        if password1 == password2:
+
+            try:
+                user = User.objects.create_user(
+                    username=username, password=password1)
+
+                if Planet.objects.filter(name=planetname).count() > 0:
+                    error =  "중복된 행성 이름입니다."
+                    return render(request, 'registration/signup.html', {'error': error})
+                    
+                else:
+                    user.planet.name = planetname
+                    user.save()
+
+            except:
+                error =  "중복된 아이디입니다."
+                return render(request, 'registration/signup.html', {'error': error})
+
             auth.login(request, user)
             return redirect('user_home')
+            
+        else:
+            error = "비밀번호가 일치하지 않습니다."
+            return render(request, 'registration/signup.html', {'error': error})
 
     return render(request, 'registration/signup.html')
 
 
 def user_home(request):
     return render(request, 'planet/user_home.html')
+
 
 @login_required(login_url='/app/login')
 def create_qna_home(request):
@@ -262,6 +293,14 @@ def result(request):
         return HttpResponse(json.dumps(result))
 
 
+<<<<<<< HEAD
+=======
+
+@login_required(login_url='/app/login')
+def share_qna(request):
+    return render(request, 'planet/share_qna.html')
+>>>>>>> f01edbfdf0025b1fe45037291a785f5127ed228d
+
 
 @login_required(login_url='/app/login')
 def answer_detail(request):
@@ -348,3 +387,43 @@ def friend_planet(request, user_pk):
     result = result[0:3]
 
     return render(request, 'planet/friend_planet.html', {'owner_planet': owner_planet, 'result': result})
+
+
+@csrf_exempt
+def answer_detail(request, score_pk):
+    score = Score.objects.get(pk=score_pk)
+    owner = score.qna.owner
+
+    if request.method == "POST":
+        request_body = json.loads(request.body)
+        print(request_body)
+        solver_pk = request_body['solver_pk']
+        owner_pk = request_body['owner_pk']
+
+        solver = User.objects.get(pk=solver_pk)
+        owner = User.objects.get(pk=owner_pk)
+
+        qna = score.qna
+
+        qna_questions = Qna_question.objects.filter(Qna=qna)
+
+        result = {}
+        i = 1
+        for pair in qna_questions:
+            choice = Choice.objects.get(solver=solver, qna_question=pair)
+            answer = Answer.objects.get(qna_question=pair)
+            if choice.isAnswer == True:
+                isAnswer = 'true'
+            else:
+                isAnswer = 'false'
+            data = {
+                "question": pair.question.content,
+                "choice": choice.option.content,
+                "answer": answer.option.content,
+                "isAnswer": isAnswer
+            }
+            result[f'{i}'] = data
+            i += 1
+        return HttpResponse(json.dumps(result))
+
+    return render(request, 'planet/answer_detail.html', {'owner': owner, 'score': score})

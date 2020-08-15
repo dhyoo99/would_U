@@ -3,9 +3,59 @@
 {% block css %}
 {% endblock css %}
 
+
 {% block content %}
+<div class="wrap">
+    <h2>answer detail</h2>
+    <p>{{owner.planet.name}} 주인의 정답 공개</p>
 
-hi!
+    <div class="qna" id="qna-js" style="overflow: scroll; width: 300px; height: 500px;">
 
+    </div>
 
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script>
+    const qnaBox = document.querySelector('#qna-js')
+
+    const showResult = function (response) {
+        qnaBox.querySelectorAll('*').forEach(n => n.remove())
+
+        const data = response.data
+        for (i in data) {
+            const qnaRow = document.createElement('div')
+            qnaRow.setAttribute('class', 'qnaRow')
+
+            const questionBox = document.createElement('p')
+            qnaRow.appendChild(questionBox)
+
+            questionBox.textContent = `Q${i}.  ${data[i].question}`
+
+            const answerBox = document.createElement('p')
+            qnaRow.appendChild(answerBox)
+            answerBox.textContent = `정답: ${data[i].answer}`
+
+            const choiceBox = document.createElement('p')
+            qnaRow.appendChild(choiceBox)
+            choiceBox.textContent = `나의 답: ${data[i].choice}`
+
+            const compareBox = document.createElement('p')
+            qnaRow.appendChild(compareBox)
+            const isAnswer = (data[i].isAnswer === 'true') ? '정답!' : '오답!'
+            compareBox.textContent = `${isAnswer}`
+
+            qnaBox.appendChild(qnaRow)
+        }
+    }
+    const getResult = () => {
+        axios.post('/app/answer_detail/{{score.pk}}', { solver_pk: "{{request.user.pk}}", owner_pk: "{{owner.pk}}" })
+            .then(response => {
+                console.log(response)
+                showResult(response)
+            })
+    }
+
+    getResult() 
+</script>
 {% endblock content %}

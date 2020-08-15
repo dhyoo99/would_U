@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+<link rel="stylesheet" type="text/css" href="{%static 'app/friend_list.css'%}">
 {% endblock css %}
 
 
 {% block content %}
-<div class="wrap">
-    <h2>Friend List</h2>
-    <p>친구들이 내 정답을 얼마나 맞췄을까?</p>
 
+<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
+
+<div class="wrap">
+    <h2>Friend <br> List</h2>
+    <p>친구들이 내 정답을 <br> 얼마나 맞췄을까?</p>
     <div class="friend_select">
         <select name="friend" id="friend" onchange="getResult()">
             {% for score in scores %}
@@ -16,10 +19,14 @@
             {% endfor %}
         </select>
     </div>
-    <div class="qna" id="qna-js" style="overflow: scroll; width: 300px; height: 500px;">
-
+    <div class="friend_score">
+        <div class="qna" id="qna-js" style="overflow: scroll;"></div>
     </div>
-    <a href="" id="friendPlanet-js"></a>
+    <div class = "friend_page_wrap">
+        <div class = "friend_page">
+                <a href="" id="friendPlanet-js"></a>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
@@ -28,7 +35,7 @@
     const qnaBox = document.querySelector('#qna-js')
     const setLink = () => {
         const friendPlanetLink = document.querySelector('#friendPlanet-js')
-        friendPlanetLink.textContent = `${friendSelect.options[friendSelect.selectedIndex].text} 행성으로 가기`
+        friendPlanetLink.textContent = `${friendSelect.options[friendSelect.selectedIndex].text} 보러가기`
         friendPlanetLink.href = `/app/friend_planet/${friendSelect.value}`
     }
 
@@ -43,13 +50,13 @@
             const questionBox = document.createElement('p')
             qnaRow.appendChild(questionBox)
 
-            questionBox.textContent = `Q. ${i}  ${data[i].question}`
+            questionBox.textContent = `Q${i}.  ${data[i].question}`
 
             const answerBox = document.createElement('p')
             qnaRow.appendChild(answerBox)
-            const isAnswer = (data[i].isAnswer === 'true') ? '정답' : '오답'
+            const isAnswer = (data[i].isAnswer === 'true') ? 'O' : 'X'
 
-            answerBox.textContent = `친구의 답: ${data[i].answer}    ${isAnswer}`
+            answerBox.textContent = `→ 친구의 답: ${data[i].answer}    ( ${isAnswer} )`
 
             qnaBox.appendChild(qnaRow)
         }
@@ -66,4 +73,5 @@
 
     getResult() 
 </script>
+
 {% endblock content %}

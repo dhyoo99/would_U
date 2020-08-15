@@ -16,38 +16,39 @@
 </div>
 
 <div class="bottom">
-
+    <div id="error">{{error}}</div>
     <form method="post" action="{% url 'signup' %}">
         {% csrf_token %}
-        <!-- <div class="signup1">
+        <div id="first_signup" class="signup1">
             <div class="id">
                 <h2>ID:</h2>
-                <input name="username" placeholder="ex. joohye" id="input" type="text" value="">
+                <input id="username"" name="username" placeholder="ex. joohye" class="input" type="text" value="">
             </div>
             <div class="id">
                 <h2>P/W:</h2>
-                <input name="password1" placeholder="ex. 1234" id="input" type="password" value="">
+                <input id="password" name="password1" placeholder="ex. 1234" class="input" type="password" value="">
             </div>
             <div class="pw">
                 <h2>P/W 확인:</h2>
-                <input name="password2" id="input" placeholder="ex. 1234" type="password" value="">
+                <input name="password2" class="input" placeholder="ex. 1234" type="password" value="">
             </div>
-            <div class="button">
-                <button type="submit" class="submit">next</button>
+            <div id="next">
+                next
             </div>
-        </div> -->
+        </div>
 
-        <div class="signup2">
+        <div id="second_signup" class="signup2">
             <div class="id2">
                 <h2>planet name : </h2>
                 <p> 당신만의 고유한 <br>행성이름을 지어주세요</p>
-                <input name="planetname" placeholder="ex. 헬리 행성 / 시리우스 " id="input" type="text" value="">
+                <input id="planetname" name="planetname" placeholder="ex. 헬리 행성 / 시리우스 " class="input" type="text" value="">
             </div>
             <br>
             <br>
             <br>
             <br>
             <div class="button">
+                <div id="back">back</div>
                 <button type="submit" class="submit">done</button>
             </div>
         </div>
@@ -55,7 +56,7 @@
     </form>
 
 </div>
-
+<script src="{% static 'app/signup.js' %}"></script>
 
 {% endblock content %}
 

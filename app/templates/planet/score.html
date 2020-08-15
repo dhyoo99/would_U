@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a> 
+<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
 
 <div class="total">
   <div class='scorebox'>
@@ -20,7 +20,7 @@
 </div>
 
 
-<a href="{% url 'answer_detail' %}">정답 상세 보기</a>
+<a href="{% url 'answer_detail' score.pk %}">정답 상세 보기</a>
 <a href="{% url 'create_qna' %}">내 문제도 만들기</a>
 
 {% endblock content %}

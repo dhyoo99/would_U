@@ -1,38 +1,83 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
-{% endblock css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/create_qna.css' %}">
+<!-- <link rel="stylesheet" type="text/css" media="(max-width:500px)" href="../static/app/account.css"> -->
 
+<link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+{% endblock css %}
 
 {% block content %}
 
-<a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a>
+<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
 
-{% if error %}
-    <p>{{error}}</p>
-{% else %}
-    <form method="post">
-        {% csrf_token %}
-        {% for question in questions %}
-        <div class='qna_box' id='question-{{forloop.counter}}'>
-            <div class='question'>
-                <span>Q {{forloop.counter}}.</span>
-                <p>{{question.content}}</p>
-            </div>
-            <div class='answer'>
-                <div class='answer_radio'>
-                    {% for option in question.options.all %}
-                    <label>{{option.content}}
-                        <input type="radio" name="{{option.question.pk}}" value={{option.pk}}>
-                    </label>
-                    {% endfor %}
-                </div>
+
+<form method="post">
+    {% csrf_token %}
+    {% for question in questions %}
+    <div class='qna_box' id='question-{{forloop.counter}}'>
+        <div class='question'>
+            <h1>Q {{forloop.counter}}.</h1>
+            <p>{{question.content}}</p>
+        </div>
+        <div class='answer'>
+            <div class='answer_radio'>
+                {% for option in question.options.all %}
+                <label><br>
+                    {{option.content}}
+                    <input type="radio" name="{{option.question.pk}}" value={{option.pk}}>
+                </label>
+                {% endfor %}
             </div>
         </div>
-        <button> next → </button>
-        {% endfor %}
-        <button type="submit" href="{% url 'share_qna' %}">done!</button>
-    </form>
-{% endif %}
+        <button class="next"> next → </button>
+    </div>
 
+  <a href="{% url 'user_home'%}"><i class="fas fa-home"></i></a>
+
+<!-- {% if error %}
+    <p>{{error}}</p>
+{% else %} -->
+    <div class="script">
+        스페이스 X에서  지구를 떠나 <br>
+        새로운 행성으로 이주하는 <br>
+        <span>“The new planet”</span><br>
+        프로젝트 참가자로 <br>
+        당신이 선발되었다. <br>
+    </div>
+    <button class="next"> next → </button>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {% for question in questions %}
+            <div class='qna_box' id='question-{{forloop.counter}}'>
+                <div class='question'>
+                    <span>Q {{forloop.counter}}.</span>
+                    <p>{{question.content}}</p>
+                </div>
+                <div class='answer'>
+                    <div class='answer_radio'>
+                        {% for option in question.options.all %}
+                        <label>{{option.content}}
+                            <input type="radio" name="{{option.question.pk}}" value={{option.pk}}>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <button class="before"> before ← </button>
+            <button class="next" onclick="tell()"> next → </button>
+            {% endfor %}
+            <!-- <button id="" type="submit" href="{% url 'share_qna' %}">done!</button> -->
+        </form>
+    </div>
+    <script src="{% static 'app/create_qna.js' %}"></script>
+
+
+    {% endfor %}
+    <!-- <button type="submit" href="{% url 'share_qna' %}">done!</button> -->
+</form>
 {% endblock content %}
