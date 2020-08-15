@@ -6,22 +6,20 @@
 
 {% block content %}
 
-<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
+<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a>
 
-<div class="total">
-  <div class='scorebox'>
-    <p>Hmm... your score is</p>
-    <h1>{{score.score}} / {{score.qna.Qna_questions.count}}</h1>
-    <h2>
-      친구에 대해 <br>
-      이 정도로 알고있군요! <br>
-      당신의 문제도 만들어보실래요?
-    </h2>
-  </div>
+<div class='scorebox'>
+  <p> Hmm... <br> your score is... </p>
+  <p> {{score.score}} / {{score.qna.Qna_questions.count}}</p>
 </div>
 
+<div class='bottom'>
+  <p> 친구에 대해 <br>
+    이 정도로 알고있군요! <br>
+    당신의 문제도 만들어보실래요? </p>
+</div>
 
-<div class = 'buttons'>
+<div class='buttons'>
   <button class='button'><a href="{% url 'answer_detail' score.pk %}">정답 상세 보기</a></button>
   <button class='button'><a href="{% url 'create_qna' %}">내 문제도 만들기</a></button>
 </div>
