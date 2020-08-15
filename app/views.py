@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.shortcuts import redirect
@@ -19,14 +19,9 @@ def signup(request):
             planetname = request.POST["planetname"]
 
             user = User.objects.create_user(username=username, password=password)
+            user.planet.name = planetname
             user.save()
             auth.login(request, user)
             return redirect('/app/')
     return render(request, 'account/signup.html')
 
-#장고 로그인 기능으로 대체
-# def login(request):
-#     return render(request, 'registration/login.html')
-
-# def logout(request):
-#     return render(request, 'registration/logged_out.html')
