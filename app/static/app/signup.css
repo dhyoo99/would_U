@@ -42,7 +42,7 @@ body {
 
 p {
   line-height: 24px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   letter-spacing: 0.3rem;
 }
 
@@ -75,8 +75,8 @@ button.submit {
 }
 
 /* button.login {
-     margin-top: 40vh; 
-  } */
+       margin-top: 40vh; 
+    } */
 
 a {
   color: black;
@@ -98,7 +98,7 @@ h2 {
 }
 
 .pw {
-  margin-bottom: 24vh;
+  margin-bottom: 15vh;
   margin-top: 5vh;
 }
 
@@ -107,4 +107,9 @@ h2 {
   color: rgb(209, 66, 66);
   font-size: 1.5rem;
   height: 4vh;
+}
+
+.id2 {
+  margin-bottom: 25vh;
+  margin-top: 5vh;
 }

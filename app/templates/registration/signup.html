@@ -1,31 +1,60 @@
-<h1> sign up </h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/signup.css' %}">
+<!-- <link rel="stylesheet" type="text/css" media="(max-width:500px)" href="../static/app/account.css"> -->
 
-<form method="POST" action="{%url 'signup' %}">
-    {% csrf_token %}
-    <div class="signup1">
-        ID:
-        <br>
-        <input name="username" type="text" value="">
-        <br>
-        <br>
-        PW:
-        <br>
-        <input name="password1" type="password" value="">
-        <br>
-        <br>
-        PW 확인:
-        <br>
-        <input name="password2" type="password" value="">
-    </div>
-    
-    <div class="signup2">
-        planet name
-        <br>
-        당신만의 고유한 행성이름을 지어주세요
-        <br>
-        <input name="planetname" type="text" value="">
-        <br>
-        <br>
-        <button type="submit" class="signup">done</button>
-    </div>
-</form>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+{% endblock css %}
+{% block content %}
+<div class="title">
+    <h1>sign up</h1>
+</div>
+
+<div class="bottom">
+
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <!-- <div class="signup1">
+            <div class="id">
+                <h2>ID:</h2>
+                <input name="username" placeholder="ex. joohye" id="input" type="text" value="">
+            </div>
+            <div class="id">
+                <h2>P/W:</h2>
+                <input name="password1" placeholder="ex. 1234" id="input" type="password" value="">
+            </div>
+            <div class="pw">
+                <h2>P/W 확인:</h2>
+                <input name="password2" id="input" placeholder="ex. 1234" type="password" value="">
+            </div>
+            <div class="button">
+                <button type="submit" class="submit">next</button>
+            </div>
+        </div> -->
+
+        <div class="signup2">
+            <div class="id2">
+                <h2>planet name : </h2>
+                <p> 당신만의 고유한 <br>행성이름을 지어주세요</p>
+                <input name="planetname" placeholder="ex. 헬리 행성 / 시리우스 " id="input" type="text" value="">
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="button">
+                <button type="submit" class="submit">done</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+{% endblock content %}
