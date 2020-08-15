@@ -1,7 +1,10 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block css %}
-{% endblock css %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>wouldU</title>
+</head>
 
 
 {% block content %}
@@ -10,7 +13,7 @@
 {% else %}
 <form method="post">
     {% csrf_token %}
-    <h3>{{planet_name}}의 주인의 선택은?</h3>
+    <h3>{{request.user.planet.name}}의 주인의 선택은?</h3>
     {% for pair in qna_questions %}
     <div class='qna_box' id='question-{{forloop.counter}}'>
         <div class='question'>
@@ -26,9 +29,10 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
-    {% endfor %}
-    <button type="submit">done!</button>
-</form>
+        {% endfor %}
+        <button type="submit">done!</button>
+    </form>
 {% endif %}
-{% endblock content %}
+</body>
+
+</html>

@@ -1,7 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block css% }
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'about.css' %}"> -->
+<link rel="stylesheet" type="text/css" href="../static/app/account.css">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+{% endblock css% }
 {% block content %}
 
-<div style='color:white;'>this is account page</div>
+<div class="title">
+    <h1>Sir, <br>
+        We need your ID and P/W . </h1>
 
+    <h3> 회원가입 혹은 로그인을 해주세요 </h3>
+</div>
+
+<div class="bottom">
+    <div class="login">
+        <button class="button"><a href="{% url 'login' %}">log in </a></button>
+        <br>
+        <button class="button"><a href="{% url 'signup' %}">sign up</a></button>
+    </div>
+</div>
 {% endblock content %}
