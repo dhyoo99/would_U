@@ -11,16 +11,12 @@
 
 {% block content %}
 
-<<<<<<< HEAD
-=======
-<a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a> 
 
->>>>>>> b52f1d93f6545c15fd23b0a3ee34a1a3fecc45b3
 <div class="wrap">
-    <div class='home_icon'>
-        <a href="{% url 'user_home' %}"><i class="fas fa-home"></i></a>
+    <div class="top">
+        <h2 class="title">Rank</h2>
+        <a href="{% url 'user_home'%}"><img class="home" src="{%static 'image 16.png'%}"></a>
     </div>
-    <h2 class="title">Rank</h2>
     <p class="message">누가 가장<br>나와 가까울까?</p>
 
     <div class="rankTable">
@@ -28,7 +24,7 @@
             <span>순위</span>
             <span>이름</span>
             <span>정답수</span>
-            <span>나와의 거리</span>
+            <span style="margin-right: 20px;">나와의 거리</span>
         </div>
         {% for data in result %}
         <div class="table_row">

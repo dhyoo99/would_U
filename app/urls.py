@@ -13,7 +13,7 @@ urlpatterns = [
     path('solve_qna/<int:qna_pk>/solve_signup/',
          views.solve_signup, name='solve_signup'),
     path('score/<int:score_pk>/', views.score, name='score'),
-
+    path('friend_list/<int:user_pk>', views.friend_list, name='friend_list'),
     path('user_home/', views.user_home, name='user_home'),
 
     path('create_qna_home/', views.create_qna_home, name='create_qna_home'),

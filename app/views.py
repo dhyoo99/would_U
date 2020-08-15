@@ -71,10 +71,6 @@ def signup(request):
     return render(request, 'registration/signup.html')
 
 
-def user_home(request):
-    return render(request, 'planet/user_home.html')
-
-
 @login_required(login_url='/app/login')
 def create_qna_home(request):
     questions = Question.objects.all()

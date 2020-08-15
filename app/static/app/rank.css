@@ -26,6 +26,7 @@ body {
     width: 12.4rem;
     height: 5.5rem;
     font-size: 4.5rem;
+    margin-top: 3.6vh;
 }
 
 .message {
@@ -48,10 +49,6 @@ body {
     align-items: center;
 }
 
-/* .rankTable  {
-    display: table;
-    width: 100%;
-} */
 
 .table_head {
     margin: 0px 0px 6px 0px;
@@ -63,7 +60,7 @@ body {
 }
 
 .table_head span{
-    font-size: 12px;
+    font-size: 12.5px;
     font-weight: 800;
 }
 
@@ -88,10 +85,3 @@ body {
     font-weight: 800;
 
 }
-
-.home_icon {
-    text-align: center;
-    font-size: 24px;
-    width: 28px;
-    height: 28px;
-  }
